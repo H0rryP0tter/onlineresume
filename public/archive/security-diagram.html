@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JWT Security Flow</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            color: #172033;
+            background: #edf2f7;
+        }
+
+        header {
+            background: #123047;
+            color: white;
+            padding: 42px 22px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0 0 10px;
+            font-size: 38px;
+        }
+
+        header p {
+            margin: 0;
+            font-size: 18px;
+            color: #d7e5ef;
+        }
+
+        main {
+            max-width: 1160px;
+            margin: 0 auto;
+            padding: 28px 18px 50px;
+        }
+
+        .legend {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 14px;
+            margin-bottom: 26px;
+        }
+
+        .legend-item,
+        .panel,
+        .step,
+        .rule {
+            background: white;
+            border: 1px solid #d6dee8;
+            border-radius: 8px;
+            box-shadow: 0 8px 22px rgba(22, 36, 58, 0.08);
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px;
+            font-weight: 700;
+        }
+
+        .dot {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            flex: 0 0 auto;
+        }
+
+        .blue { background: #2775ca; }
+        .green { background: #1d9a72; }
+        .orange { background: #d66a1f; }
+        .red { background: #c93f4a; }
+        .purple { background: #7557b6; }
+
+        .flow {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+            align-items: stretch;
+            margin-bottom: 28px;
+        }
+
+        .step {
+            min-height: 160px;
+            overflow: hidden;
+        }
+
+        .step h2 {
+            margin: 0;
+            padding: 14px 16px;
+            color: white;
+            font-size: 18px;
+        }
+
+        .step .body {
+            padding: 16px;
+        }
+
+        .step p {
+            margin: 0 0 12px;
+            line-height: 1.45;
+        }
+
+        code {
+            background: #f0f4f8;
+            border: 1px solid #d7e0ea;
+            border-radius: 5px;
+            color: #13293d;
+            padding: 2px 6px;
+            font-size: 14px;
+        }
+
+        .arrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #586a7c;
+            font-size: 26px;
+            font-weight: 800;
+            min-height: 32px;
+        }
+
+        .decision-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+            margin-bottom: 28px;
+        }
+
+        .panel {
+            padding: 20px;
+        }
+
+        .panel h2 {
+            margin: 0 0 14px;
+            font-size: 22px;
+        }
+
+        .path {
+            border-left: 6px solid;
+            padding-left: 14px;
+            margin-top: 14px;
+        }
+
+        .path.good { border-color: #1d9a72; }
+        .path.bad { border-color: #c93f4a; }
+
+        .path h3 {
+            margin: 0 0 8px;
+        }
+
+        .path p {
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        .ownership {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+            margin-bottom: 28px;
+        }
+
+        .rule {
+            padding: 20px;
+        }
+
+        .rule h2 {
+            margin: 0 0 12px;
+            font-size: 22px;
+        }
+
+        .rule pre {
+            margin: 14px 0 0;
+            padding: 16px;
+            background: #142333;
+            color: #d9f7ef;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-size: 15px;
+        }
+
+        .mini-flow {
+            display: grid;
+            gap: 10px;
+        }
+
+        .mini {
+            border-left: 5px solid #7557b6;
+            background: #f7f4ff;
+            border-radius: 6px;
+            padding: 12px;
+            font-weight: 700;
+        }
+
+        .footer-note {
+            text-align: center;
+            color: #536274;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 860px) {
+            .flow,
+            .decision-grid,
+            .ownership {
+                grid-template-columns: 1fr;
+            }
+
+            header h1 {
+                font-size: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>JWT Authorization & Security Flow</h1>
+        <p>How login, cookies, middleware, users, and private resumes work together.</p>
+    </header>
+
+    <main>
+        <section class="legend" aria-label="Color legend">
+            <div class="legend-item"><span class="dot blue"></span> Browser / Frontend</div>
+            <div class="legend-item"><span class="dot green"></span> Auth Success</div>
+            <div class="legend-item"><span class="dot orange"></span> Server Logic</div>
+            <div class="legend-item"><span class="dot red"></span> Security Block</div>
+            <div class="legend-item"><span class="dot purple"></span> Database Models</div>
+        </section>
+
+        <section class="flow" aria-label="Main authentication flow">
+            <article class="step">
+                <h2 class="blue">1. Browser</h2>
+                <div class="body">
+                    <p>User fills in the register or login form on <code>index.html</code>.</p>
+                    <p>The browser sends email and password to the server.</p>
+                    <code>POST /auth/register</code><br>
+                    <code>POST /auth/login</code>
+                </div>
+            </article>
+
+            <article class="step">
+                <h2 class="orange">2. Auth Controller</h2>
+                <div class="body">
+                    <p><code>authController.js</code> validates the request.</p>
+                    <p>Register hashes the password. Login compares the password with the saved hash.</p>
+                </div>
+            </article>
+
+            <article class="step">
+                <h2 class="purple">3. User Model</h2>
+                <div class="body">
+                    <p><code>user.js</code> defines users in MongoDB.</p>
+                    <p>It stores <code>email</code> and <code>passwordHash</code>, not the raw password.</p>
+                </div>
+            </article>
+
+            <div class="arrow">↓</div>
+            <div class="arrow">↓</div>
+            <div class="arrow">↓</div>
+
+            <article class="step">
+                <h2 class="green">4. JWT Created</h2>
+                <div class="body">
+                    <p>The server signs a JWT using <code>JWT_SECRET</code>.</p>
+                    <p>The token contains safe user data: <code>id</code> and <code>email</code>.</p>
+                </div>
+            </article>
+
+            <article class="step">
+                <h2 class="green">5. HttpOnly Cookie</h2>
+                <div class="body">
+                    <p>The JWT is stored in an <code>authToken</code> cookie.</p>
+                    <p><code>HttpOnly</code> means frontend JavaScript cannot read the token.</p>
+                </div>
+            </article>
+
+            <article class="step">
+                <h2 class="blue">6. Protected Request</h2>
+                <div class="body">
+                    <p>When the browser calls a protected route, it sends the cookie automatically.</p>
+                    <code>GET /resume/all</code>
+                </div>
+            </article>
+        </section>
+
+        <section class="decision-grid" aria-label="Authorization decision">
+            <article class="panel">
+                <h2>Middleware Check</h2>
+                <p><code>middleware/auth.js</code> is the gatekeeper. It reads the cookie, verifies the JWT, and decides whether the request can continue.</p>
+
+                <div class="path good">
+                    <h3>Valid Token</h3>
+                    <p>The middleware sets <code>req.user = { id, email }</code>, then calls <code>next()</code>.</p>
+                </div>
+
+                <div class="path bad">
+                    <h3>Missing or Invalid Token</h3>
+                    <p>The request stops immediately with <code>401 Authentication required</code> or <code>401 Invalid or expired token</code>.</p>
+                </div>
+            </article>
+
+            <article class="panel">
+                <h2>What Controllers Receive</h2>
+                <div class="mini-flow">
+                    <div class="mini">Browser sends cookie</div>
+                    <div class="mini">auth.js verifies JWT</div>
+                    <div class="mini">req.user is attached</div>
+                    <div class="mini">resumeController.js uses req.user.id</div>
+                </div>
+            </article>
+        </section>
+
+        <section class="ownership" aria-label="Resume ownership">
+            <article class="rule">
+                <h2>Private Resume Rule</h2>
+                <p>Every resume belongs to one user through <code>userId</code>. The frontend does not decide ownership. The server does.</p>
+                <pre><code>Resume.find({
+  userId: req.user.id
+})</code></pre>
+            </article>
+
+            <article class="rule">
+                <h2>Why This Is Secure</h2>
+                <p>If User A tries to access User B's resume, the query still filters by User A's id. MongoDB will not return User B's document.</p>
+                <pre><code>Resume.findOne({
+  _id: resumeId,
+  userId: req.user.id
+})</code></pre>
+            </article>
+        </section>
+
+        <p class="footer-note">
+            Authentication answers: "Who are you?" Authorization answers: "Are you allowed to access this data?"
+            In this project, JWT proves the user identity, and <code>userId: req.user.id</code> enforces access.
+        </p>
+    </main>
+</body>
+</html>

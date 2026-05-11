@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OnlineResume | The Blueprint</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        /* Solarized Dark */
+        :root {
+            --base03: #002b36;
+            --base02: #073642;
+            --base01: #586e75;
+            --base00: #657b83;
+            --base0: #839496;
+            --base1: #93a1a1;
+            --base2: #eee8d5;
+            --base3: #fdf6e3;
+            --yellow: #b58900;
+            --orange: #cb4b16;
+            --red: #dc322f;
+            --magenta: #d33682;
+            --violet: #6c71c4;
+            --blue: #268bd2;
+            --cyan: #2aa198;
+            --green: #859900;
+        }
+
+        body {
+            font-family: 'JetBrains Mono', 'Courier New', monospace;
+            background: var(--base03);
+            color: var(--base1);
+            margin: 0;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* SCAN LINE OVERLAY */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(0,0,0,0.03) 2px,
+                rgba(0,0,0,0.03) 4px
+            );
+            pointer-events: none;
+            z-index: 100;
+        }
+
+        /* TOP BAR */
+        .topbar {
+            background: var(--base02);
+            border-bottom: 1px solid var(--base01);
+            padding: 8px 48px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .topbar-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .tb-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .dot-red { background: var(--red); }
+        .dot-yellow { background: var(--yellow); }
+        .dot-green { background: var(--green); }
+
+        .tb-title {
+            font-size: 12px;
+            color: var(--base00);
+            margin-left: 8px;
+        }
+
+        .back-link {
+            font-size: 12px;
+            color: var(--cyan);
+            text-decoration: none;
+            opacity: 0.75;
+        }
+
+        .back-link:hover { opacity: 1; }
+
+        .tb-right {
+            font-size: 11px;
+            color: var(--base01);
+        }
+
+        /* HERO / TERMINAL */
+        .hero {
+            padding: 56px 48px 48px;
+            border-bottom: 1px dashed var(--base01);
+            background-image: radial-gradient(var(--base02) 1px, transparent 1px);
+            background-size: 24px 24px;
+            position: relative;
+        }
+
+        .prompt-line {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 4px;
+        }
+
+        .prompt-user { color: var(--green); font-weight: 500; }
+        .prompt-at { color: var(--base01); }
+        .prompt-host { color: var(--blue); font-weight: 500; }
+        .prompt-dir { color: var(--yellow); }
+        .prompt-sym { color: var(--cyan); }
+
+        .cmd-text {
+            color: var(--base2);
+            font-size: 13px;
+        }
+
+        .hero-output {
+            padding-left: 0;
+            margin-top: 32px;
+        }
+
+        .hero-title {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--blue);
+            letter-spacing: -0.02em;
+            line-height: 1.0;
+            margin-bottom: 8px;
+        }
+
+        .hero-sub {
+            font-size: 14px;
+            color: var(--cyan);
+            margin-bottom: 24px;
+            font-style: italic;
+            font-weight: 300;
+        }
+
+        .hero-desc {
+            font-size: 13px;
+            color: var(--base0);
+            font-weight: 300;
+            max-width: 600px;
+            line-height: 1.8;
+            margin-bottom: 36px;
+        }
+
+        .hero-cta {
+            display: inline-block;
+            border: 1px solid var(--cyan);
+            color: var(--cyan);
+            padding: 10px 24px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            text-decoration: none;
+        }
+
+        .hero-cta:hover { background: var(--cyan); color: var(--base03); }
+
+        .cursor {
+            display: inline-block;
+            width: 9px;
+            height: 17px;
+            background: var(--cyan);
+            animation: blink 1.1s step-end infinite;
+            vertical-align: text-bottom;
+            margin-left: 2px;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* SPEC PANELS */
+        .spec-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            border-bottom: 1px solid var(--base01);
+        }
+
+        .spec-panel {
+            padding: 28px 32px;
+            border-right: 1px solid var(--base01);
+        }
+
+        .spec-panel:last-child { border-right: none; }
+
+        .spec-key {
+            font-size: 10px;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--base01);
+            margin-bottom: 8px;
+        }
+
+        .spec-val {
+            font-size: 14px;
+            color: var(--green);
+            margin-bottom: 4px;
+            font-weight: 500;
+        }
+
+        .spec-comment {
+            font-size: 12px;
+            color: var(--base01);
+            font-style: italic;
+        }
+
+        /* LOG OUTPUT */
+        .log-section {
+            padding: 32px 48px;
+            border-bottom: 1px solid var(--base01);
+            background: var(--base02);
+        }
+
+        .log-label {
+            font-size: 10px;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--base01);
+            margin-bottom: 16px;
+        }
+
+        .log-line {
+            display: flex;
+            gap: 16px;
+            font-size: 12px;
+            margin-bottom: 6px;
+            line-height: 1.6;
+        }
+
+        .log-ts { color: var(--base01); min-width: 80px; flex-shrink: 0; }
+        .log-lvl-info { color: var(--blue); min-width: 50px; }
+        .log-lvl-ok { color: var(--green); min-width: 50px; }
+        .log-lvl-warn { color: var(--yellow); min-width: 50px; }
+        .log-msg { color: var(--base1); }
+
+        /* EMPTY STATE */
+        .empty-section {
+            padding: 60px 48px 80px;
+        }
+
+        .search-row {
+            display: flex;
+            gap: 0;
+            margin-bottom: 28px;
+            border: 1px solid var(--base01);
+        }
+
+        .search-prompt {
+            background: var(--base02);
+            padding: 12px 16px;
+            font-size: 13px;
+            color: var(--cyan);
+            border-right: 1px solid var(--base01);
+            white-space: nowrap;
+        }
+
+        .search-input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            outline: none;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            color: var(--base2);
+            padding: 12px 16px;
+        }
+
+        .search-input::placeholder { color: var(--base01); }
+
+        .empty-state {
+            border: 1px solid var(--base01);
+            background: var(--base02);
+            padding: 72px 60px;
+            text-align: center;
+        }
+
+        .empty-err {
+            font-size: 11px;
+            letter-spacing: 0.16em;
+            color: var(--magenta);
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .empty-output {
+            font-size: 1.2rem;
+            color: var(--base0);
+            font-style: italic;
+            font-weight: 300;
+            margin-bottom: 8px;
+        }
+
+        .empty-sub {
+            font-size: 13px;
+            color: var(--base01);
+            margin-bottom: 40px;
+        }
+
+        .empty-cmd {
+            display: inline-block;
+            border: 1px solid var(--cyan);
+            color: var(--cyan);
+            padding: 12px 28px;
+            font-size: 13px;
+            text-decoration: none;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .empty-cmd:hover { background: var(--cyan); color: var(--base03); }
+
+        /* FOOTER */
+        footer {
+            background: var(--base02);
+            border-top: 1px solid var(--base01);
+            padding: 12px 48px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        footer span {
+            font-size: 11px;
+            color: var(--base01);
+        }
+
+        .status-ok { color: var(--green); }
+    </style>
+</head>
+<body>
+
+    <div class="topbar">
+        <div class="topbar-left">
+            <div class="tb-dot dot-red"></div>
+            <div class="tb-dot dot-yellow"></div>
+            <div class="tb-dot dot-green"></div>
+            <span class="tb-title">resume_db — bash — 120×40</span>
+        </div>
+        <a href="layouts.html" class="back-link">← layouts.html</a>
+        <span class="tb-right">SSH: resume@build.local</span>
+    </div>
+
+    <section class="hero">
+        <div class="prompt-line">
+            <span><span class="prompt-user">user</span><span class="prompt-at">@</span><span class="prompt-host">build</span><span class="prompt-at">:</span><span class="prompt-dir">~/resume</span><span class="prompt-sym">$</span></span>
+            <span class="cmd-text">SYSTEM.BUILD_RESUME() --init --verbose</span>
+        </div>
+        <div class="hero-output">
+            <div class="hero-title">Blueprint</div>
+            <div class="hero-sub">// precision data for engineers, developers, and systems thinkers</div>
+            <p class="hero-desc">A terminal-native resume platform built for people who think in schemas. Structured data, searchable indexes, and strict validation — because your career deserves the same rigour as your code.</p>
+            <a href="#empty" class="hero-cta">$ initiate_upload<span class="cursor"></span></a>
+        </div>
+    </section>
+
+    <div class="spec-row">
+        <div class="spec-panel">
+            <div class="spec-key">LOG_01 :: Structural</div>
+            <div class="spec-val">schema: strict</div>
+            <div class="spec-comment">// JSON validation on all fields</div>
+        </div>
+        <div class="spec-panel">
+            <div class="spec-key">LOG_02 :: Technical</div>
+            <div class="spec-val">index: full-text</div>
+            <div class="spec-comment">// O(log n) search across all records</div>
+        </div>
+        <div class="spec-panel">
+            <div class="spec-key">LOG_03 :: Fluidics</div>
+            <div class="spec-val">env: portable</div>
+            <div class="spec-comment">// cross-platform, no deps required</div>
+        </div>
+    </div>
+
+    <div class="log-section">
+        <div class="log-label">// system log</div>
+        <div class="log-line">
+            <span class="log-ts">09:41:02</span>
+            <span class="log-lvl-ok">[OK]</span>
+            <span class="log-msg">Database initialised. Engine: v4.2.1</span>
+        </div>
+        <div class="log-line">
+            <span class="log-ts">09:41:02</span>
+            <span class="log-lvl-info">[INFO]</span>
+            <span class="log-msg">Schema loaded: resume_v2.json — 14 fields validated</span>
+        </div>
+        <div class="log-line">
+            <span class="log-ts">09:41:03</span>
+            <span class="log-lvl-warn">[WARN]</span>
+            <span class="log-msg">Collection empty. No documents found in /profiles</span>
+        </div>
+        <div class="log-line">
+            <span class="log-ts">09:41:03</span>
+            <span class="log-lvl-info">[INFO]</span>
+            <span class="log-msg">Awaiting first INSERT operation. System ready.</span>
+        </div>
+    </div>
+
+    <div id="empty" class="empty-section">
+        <div class="search-row">
+            <span class="search-prompt">$ grep -r</span>
+            <input class="search-input" type="text" placeholder="query profiles by skill, role, or stack...">
+        </div>
+        <div class="empty-state">
+            <div class="empty-err">&gt; ERR: DATABASE_VACANT · 0x0000</div>
+            <div class="empty-output">Collection is empty.</div>
+            <div class="empty-sub">No documents match query. Please initialize first profile to begin the index.</div>
+            <br><br>
+            <a href="#" class="empty-cmd">$ db.profiles.insertOne({...})</a>
+        </div>
+    </div>
+
+    <footer>
+        <span>blueprint@resume:~$ <span class="status-ok">●</span> connected</span>
+        <span>OnlineResume · Engineering Edition</span>
+        <span><a href="layouts.html" style="color:var(--base01);text-decoration:none;">← layouts.html</a></span>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Layout Picker</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #f4f7f6;
+            margin: 0;
+            padding: 40px 20px;
+            color: #2c3e50;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #7f8c8d;
+            margin-bottom: 48px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+        }
+
+        .card-preview {
+            height: 140px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .preview-minimalist {
+            background: #fff;
+            border-bottom: 1px solid #e2e2e2;
+            color: #1a1a1a;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .preview-journal {
+            background: #fffcf5;
+            border-bottom: 1px solid #d1cfc8;
+            color: #2b2b2b;
+            font-family: 'Georgia', serif;
+            font-weight: normal;
+            font-style: italic;
+        }
+
+        .card-body {
+            padding: 24px;
+        }
+
+        .card-body h2 {
+            margin: 0 0 6px;
+            font-size: 1.1rem;
+        }
+
+        .card-body p {
+            margin: 0 0 20px;
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            line-height: 1.5;
+        }
+
+        .tag {
+            display: inline-block;
+            font-size: 0.75rem;
+            padding: 3px 8px;
+            border-radius: 4px;
+            margin-right: 4px;
+            margin-bottom: 12px;
+        }
+
+        .tag-dark {
+            background: #1a1a1a;
+            color: white;
+        }
+
+        .tag-warm {
+            background: #fffcf5;
+            color: #2b2b2b;
+            border: 1px solid #d1cfc8;
+        }
+
+        .tag-blue {
+            background: #eaf4fd;
+            color: #2980b9;
+        }
+
+        .btn {
+            display: block;
+            text-align: center;
+            padding: 10px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: background 0.2s;
+        }
+
+        .btn-dark {
+            background: #1a1a1a;
+            color: white;
+        }
+
+        .btn-dark:hover {
+            background: #333;
+        }
+
+        .btn-warm {
+            background: #2b2b2b;
+            color: #fffcf5;
+        }
+
+        .btn-warm:hover {
+            background: #444;
+        }
+
+        .preview-vivid {
+            background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            text-shadow: 0 2px 6px rgba(0,0,0,0.15);
+        }
+
+        .tag-vivid {
+            background: #ede9fe;
+            color: #6366f1;
+        }
+
+        .btn-vivid {
+            background: linear-gradient(135deg, #6366f1, #a855f7);
+            color: white;
+        }
+
+        .btn-vivid:hover {
+            background: linear-gradient(135deg, #4f46e5, #9333ea);
+        }
+
+        .preview-community {
+            background: linear-gradient(135deg, #ff9f43 0%, #ee5253 100%);
+            color: white;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        .tag-warm-red {
+            background: #fff1ee;
+            color: #ee5253;
+        }
+
+        .btn-community {
+            background: linear-gradient(135deg, #ff9f43, #ee5253);
+            color: white;
+        }
+
+        .btn-community:hover {
+            background: linear-gradient(135deg, #e08a2f, #d44040);
+        }
+
+        .preview-launchpad  { background: #ff7675; color: white; font-family: 'Quicksand', sans-serif; border-radius: 0 0 30px 30px; }
+        .preview-workbench  { background: #1a1a1a; color: white; font-family: 'Arial Black', sans-serif; border-bottom: 4px solid #f39c12; font-size: 1.1rem; letter-spacing: 1px; }
+        .preview-concierge  { background: #1e3799; color: #f8c291; font-family: 'Palatino', serif; font-style: italic; font-weight: normal; }
+        .preview-clinic     { background: linear-gradient(to bottom, #ffffff, #d9e2ec); color: #102a43; font-family: 'Helvetica', sans-serif; }
+        .preview-blueprint  { background: #002b36; color: #268bd2; font-family: 'Courier New', monospace; font-size: 0.9rem; }
+        .preview-ledger     { background: white; color: #2c3e50; font-family: 'Times New Roman', serif; border-bottom: 3px solid #27ae60; }
+        .preview-studio     { background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), #222; color: white; font-family: 'Avenir', sans-serif; letter-spacing: -1px; }
+
+        .tag-coral    { background: #ffe8e8; color: #ff7675; }
+        .tag-orange   { background: #fef3e2; color: #f39c12; }
+        .tag-navy     { background: #e8ecf8; color: #1e3799; }
+        .tag-clinical { background: #e1e8ed; color: #334e68; }
+        .tag-teal     { background: #e0f5f4; color: #2aa198; }
+        .tag-green    { background: #e8f8ee; color: #27ae60; }
+        .tag-black    { background: #222; color: #eee; }
+
+        .btn-launchpad  { background: #6c5ce7; color: white; }
+        .btn-launchpad:hover  { background: #5849c2; }
+        .btn-workbench  { background: #f39c12; color: #1a1a1a; }
+        .btn-workbench:hover  { background: #d68910; }
+        .btn-concierge  { background: #1e3799; color: #f8c291; }
+        .btn-concierge:hover  { background: #152a6e; }
+        .btn-clinic     { background: #007ace; color: white; }
+        .btn-clinic:hover     { background: #0062a3; }
+        .btn-blueprint  { background: #002b36; color: #2aa198; border: 1px solid #2aa198; }
+        .btn-blueprint:hover  { background: #073642; }
+        .btn-ledger     { background: #27ae60; color: white; }
+        .btn-ledger:hover     { background: #1e8449; }
+        .btn-studio     { background: #111; color: white; border: 1px solid #555; }
+        .btn-studio:hover     { background: #333; }
+
+        .preview-telegraph  { background: #f7f3ee; color: #1a1210; font-family: 'Playfair Display', 'Times New Roman', Georgia, serif; font-size: 1rem; font-weight: 700; border-bottom: 3px double #1a1210; letter-spacing: -0.01em; }
+        .tag-sepia    { background: #ede8e0; color: #3d3530; border: 1px solid #c9bfb5; }
+        .btn-telegraph  { background: #1a1210; color: #f7f3ee; border: 1px solid #1a1210; }
+        .btn-telegraph:hover  { background: #3d3530; }
+    </style>
+</head>
+
+<body>
+    <h1>Layout Picker</h1>
+    <p class="subtitle">Preview each layout and decide which style suits your resume gallery.</p>
+
+    <div class="grid">
+
+        <div class="card">
+            <div class="card-preview preview-minimalist">Plain Text. Professional.</div>
+            <div class="card-body">
+                <h2>Minimalist</h2>
+                <div>
+                    <span class="tag tag-dark">Sans-serif</span>
+                    <span class="tag tag-dark">Black & White</span>
+                    <span class="tag tag-blue">Tech feel</span>
+                </div>
+                <p>Stark, structured, and distraction-free. Sharp grid layout with bold typography.</p>
+                <a href="minimalist.html" class="btn btn-dark">Preview →</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-preview preview-journal">Every Life has a Story.</div>
+            <div class="card-body">
+                <h2>Journal</h2>
+                <div>
+                    <span class="tag tag-warm">Serif</span>
+                    <span class="tag tag-warm">Warm tones</span>
+                    <span class="tag tag-blue">Literary feel</span>
+                </div>
+                <p>Warm paper tones and editorial typography. A timeless, story-driven presentation.</p>
+                <a href="journal.html" class="btn btn-warm">Preview →</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-preview preview-vivid">Dream Jobs start here.</div>
+            <div class="card-body">
+                <h2>Vivid</h2>
+                <div>
+                    <span class="tag tag-vivid">Gradient</span>
+                    <span class="tag tag-vivid">Rounded</span>
+                    <span class="tag tag-vivid">Colorful</span>
+                </div>
+                <p>Bold purple gradient hero, pill buttons, and floating cards. Modern and energetic.</p>
+                <a href="vivid.html" class="btn btn-vivid">Preview →</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-preview preview-community">Your Skills. Your Future.</div>
+            <div class="card-body">
+                <h2>Community</h2>
+                <div>
+                    <span class="tag tag-warm-red">Warm gradient</span>
+                    <span class="tag tag-warm-red">Inclusive</span>
+                    <span class="tag tag-blue">Accessible</span>
+                </div>
+                <p>Orange-to-red gradient with a welcoming, everyone-belongs tone. Broad and friendly.</p>
+                <a href="community.html" class="btn btn-community">Preview →</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-preview preview-launchpad">Your First Step.</div>
+            <div class="card-body">
+                <h2>Launchpad</h2>
+                <div><span class="tag tag-coral">Coral</span><span class="tag tag-coral">Rounded</span><span class="tag tag-blue">Student-friendly</span></div>
+                <p>Soft coral hero with large rounded corners. Warm and encouraging — built for first-timers.</p>
+                <a href="launchpad.html" class="btn btn-launchpad">Preview →</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-preview preview-workbench">HANDY & READY</div>
+            <div class="card-body">
+                <h2>Workbench</h2>
+                <div><span class="tag tag-orange">Bold</span><span class="tag tag-orange">Dark</span><span class="tag tag-blue">Trades</span></div>
+                <p>Dark steel background with safety-orange accents. Rugged and no-nonsense — built for tradespeople.</p>
+                <a href="workbench.html" class="btn btn-workbench">Preview →</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-preview preview-concierge">At Your Service</div>
+            <div class="card-body">
+                <h2>Concierge</h2>
+                <div><span class="tag tag-navy">Navy</span><span class="tag tag-navy">Gold</span><span class="tag tag-blue">Hospitality</span></div>
+                <p>Deep navy with warm gold typography. Refined and elegant — suited for hospitality professionals.</p>
+                <a href="concierge.html" class="btn btn-concierge">Preview →</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-preview preview-clinic">Verified Care.</div>
+            <div class="card-body">
+                <h2>Clinic</h2>
+                <div><span class="tag tag-clinical">Clean</span><span class="tag tag-clinical">Clinical</span><span class="tag tag-blue">Medical</span></div>
+                <p>White-to-steel-blue gradient with a formal header bar. Trustworthy and credential-focused.</p>
+                <a href="clinic.html" class="btn btn-clinic">Preview →</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-preview preview-blueprint">SYSTEM.BUILD_RESUME()</div>
+            <div class="card-body">
+                <h2>Blueprint</h2>
+                <div><span class="tag tag-teal">Terminal</span><span class="tag tag-teal">Dark</span><span class="tag tag-blue">Engineering</span></div>
+                <p>Dark Solarized theme with dot-grid background and monospace font. Pure developer aesthetic.</p>
+                <a href="blueprint.html" class="btn btn-blueprint">Preview →</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-preview preview-ledger">The Professional Ledger</div>
+            <div class="card-body">
+                <h2>Ledger</h2>
+                <div><span class="tag tag-green">Green accent</span><span class="tag tag-green">Formal</span><span class="tag tag-blue">Finance</span></div>
+                <p>Clean white layout with a bold green accent strip and serif typography. Precise and authoritative.</p>
+                <a href="ledger.html" class="btn btn-ledger">Preview →</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-preview preview-studio">The Studio.</div>
+            <div class="card-body">
+                <h2>Studio</h2>
+                <div><span class="tag tag-black">Black</span><span class="tag tag-black">Full-screen</span><span class="tag tag-blue">Creative</span></div>
+                <p>Full-screen dark hero with background image overlay. Cinematic and portfolio-ready.</p>
+                <a href="studio.html" class="btn btn-studio">Preview →</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-preview preview-telegraph">The Telegraph</div>
+            <div class="card-body">
+                <h2>Telegraph</h2>
+                <div><span class="tag tag-sepia">Broadsheet</span><span class="tag tag-sepia">Editorial</span><span class="tag tag-blue">Journalism</span></div>
+                <p>Newspaper broadsheet layout with Playfair Display, column rules, and masthead typography. For journalists, academics, and public professionals.</p>
+                <a href="telegraph.html" class="btn btn-telegraph">Preview →</a>
+            </div>
+        </div>
+</body>
+
+</html>

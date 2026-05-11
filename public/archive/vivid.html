@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OnlineResume | Vivid</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --violet: #5b3ff8;
+            --violet-dark: #3d1fc4;
+            --purple: #9b4fff;
+            --pink: #f040a0;
+            --bg: #f5f3ff;
+            --surface: #ffffff;
+            --text: #1a1030;
+            --muted: #6b5fa0;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            margin: 0;
+        }
+
+        /* BACK LINK */
+        .back-link {
+            position: absolute;
+            top: 22px;
+            left: 28px;
+            font-size: 12px;
+            color: rgba(255,255,255,0.75);
+            text-decoration: none;
+            font-family: 'Outfit', sans-serif;
+            letter-spacing: 0.04em;
+            z-index: 10;
+        }
+
+        .back-link:hover { color: rgba(255,255,255,1); }
+
+        /* HERO */
+        .hero {
+            position: relative;
+            background: linear-gradient(140deg, #4015d0 0%, #7b2fff 50%, #b44fff 100%);
+            padding: 120px 60px 160px;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -120px; right: -120px;
+            width: 480px; height: 480px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.06);
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -80px; left: -60px;
+            width: 300px; height: 300px;
+            border-radius: 50%;
+            background: rgba(255,100,200,0.12);
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.25);
+            border-radius: 100px;
+            padding: 6px 18px;
+            font-size: 12px;
+            color: rgba(255,255,255,0.9);
+            letter-spacing: 0.06em;
+            margin-bottom: 28px;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .hero h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: 4.5rem;
+            font-weight: 800;
+            color: white;
+            line-height: 1.05;
+            letter-spacing: -0.02em;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 40px;
+            font-weight: 300;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-ctas {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-primary {
+            background: white;
+            color: var(--violet);
+            padding: 16px 36px;
+            border-radius: 100px;
+            font-family: 'Syne', sans-serif;
+            font-weight: 700;
+            font-size: 14px;
+            text-decoration: none;
+            letter-spacing: 0.02em;
+        }
+
+        .cta-secondary {
+            border: 1.5px solid rgba(255,255,255,0.4);
+            color: white;
+            padding: 16px 36px;
+            border-radius: 100px;
+            font-size: 14px;
+            text-decoration: none;
+            letter-spacing: 0.02em;
+        }
+
+        /* FLOATING CARDS */
+        .float-cards {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 0 40px;
+            margin-top: -56px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .float-card {
+            background: var(--surface);
+            border-radius: 20px;
+            padding: 28px 32px;
+            flex: 1;
+            max-width: 260px;
+            box-shadow: 0 24px 48px rgba(91,63,248,0.12), 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        .float-card-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            margin-bottom: 16px;
+        }
+
+        .icon-violet { background: #ede8ff; }
+        .icon-pink { background: #ffe8f5; }
+        .icon-teal { background: #e3faf5; }
+
+        .float-card-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .float-card-desc {
+            font-size: 13px;
+            color: var(--muted);
+            font-weight: 300;
+            line-height: 1.6;
+        }
+
+        /* SEARCH AREA */
+        .main-content {
+            max-width: 900px;
+            margin: 64px auto 0;
+            padding: 0 40px 80px;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--surface);
+            border-radius: 16px;
+            padding: 14px 20px;
+            box-shadow: 0 4px 24px rgba(91,63,248,0.08);
+            margin-bottom: 32px;
+        }
+
+        .search-icon {
+            font-size: 18px;
+            opacity: 0.4;
+        }
+
+        .search-bar input {
+            flex: 1;
+            border: none;
+            outline: none;
+            font-family: 'Outfit', sans-serif;
+            font-size: 15px;
+            color: var(--text);
+            background: transparent;
+        }
+
+        .search-bar input::placeholder { color: #b0a8d4; }
+
+        .filter-pill {
+            background: var(--bg);
+            border-radius: 100px;
+            padding: 6px 14px;
+            font-size: 12px;
+            color: var(--muted);
+            border: none;
+            cursor: pointer;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        /* EMPTY STATE */
+        .empty-state {
+            background: var(--surface);
+            border-radius: 28px;
+            padding: 90px 60px;
+            text-align: center;
+            box-shadow: 0 8px 40px rgba(91,63,248,0.06);
+        }
+
+        .empty-glyph {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #ede8ff, #ffe8f5);
+            border-radius: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            margin: 0 auto 28px;
+        }
+
+        .empty-heading {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 12px;
+        }
+
+        .empty-body {
+            font-size: 15px;
+            color: var(--muted);
+            font-weight: 300;
+            margin-bottom: 36px;
+            max-width: 380px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.7;
+        }
+
+        .empty-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--violet), var(--purple));
+            color: white;
+            padding: 16px 40px;
+            border-radius: 100px;
+            font-family: 'Syne', sans-serif;
+            font-weight: 700;
+            font-size: 14px;
+            text-decoration: none;
+            letter-spacing: 0.02em;
+        }
+    </style>
+</head>
+<body>
+
+    <section class="hero">
+        <a href="layouts.html" class="back-link">← Back to layouts</a>
+        <div class="hero-badge">✦ Now open to all professionals</div>
+        <h1>Dream Jobs<br>start here.</h1>
+        <p>Beautifully organised profiles, built to get you noticed.</p>
+        <div class="hero-ctas">
+            <a href="#gallery" class="cta-primary">Create My Profile</a>
+            <a href="#" class="cta-secondary">Browse profiles</a>
+        </div>
+    </section>
+
+    <div class="float-cards">
+        <div class="float-card">
+            <div class="float-card-icon icon-violet">⚡</div>
+            <div class="float-card-title">Fast & structured</div>
+            <p class="float-card-desc">Built on a clean schema. Your data is always well-organised.</p>
+        </div>
+        <div class="float-card">
+            <div class="float-card-icon icon-pink">🛡</div>
+            <div class="float-card-title">Secure by design</div>
+            <p class="float-card-desc">Your profile, your control. Nothing shared without your say.</p>
+        </div>
+        <div class="float-card">
+            <div class="float-card-icon icon-teal">🎨</div>
+            <div class="float-card-title">Visually yours</div>
+            <p class="float-card-desc">Pick a layout that fits your field and your personality.</p>
+        </div>
+    </div>
+
+    <div id="gallery" class="main-content">
+        <div class="search-bar">
+            <span class="search-icon">⌕</span>
+            <input type="text" placeholder="Search profiles by name, skill, or role…">
+            <button class="filter-pill">Filter</button>
+            <button class="filter-pill">Sort</button>
+        </div>
+
+        <div class="empty-state">
+            <div class="empty-glyph">✨</div>
+            <h2 class="empty-heading">Ready to shine?</h2>
+            <p class="empty-body">The gallery is empty and waiting. Be the first to create a profile and claim your spot at the top.</p>
+            <a href="#" class="empty-btn">Create my profile →</a>
+        </div>
+    </div>
+
+</body>
+</html>

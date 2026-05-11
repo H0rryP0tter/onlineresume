@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OnlineResume | Minimal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --black: #0d0d0d;
+            --gray-1: #1f1f1f;
+            --gray-3: #6b6b6b;
+            --gray-5: #b8b8b8;
+            --gray-7: #e8e8e8;
+            --gray-8: #f4f4f4;
+            --white: #ffffff;
+            --accent: #0d0d0d;
+            --mono: 'DM Mono', monospace;
+            --sans: 'DM Sans', sans-serif;
+        }
+
+        body {
+            font-family: var(--sans);
+            background: var(--white);
+            color: var(--black);
+            margin: 0;
+            line-height: 1.55;
+        }
+
+        /* NAV */
+        nav {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            padding: 0 48px;
+            height: 56px;
+            border-bottom: 1px solid var(--gray-7);
+        }
+
+        .nav-left { display: flex; align-items: center; gap: 8px; }
+        .nav-logo { font-family: var(--mono); font-size: 13px; font-weight: 500; letter-spacing: -0.02em; }
+        .nav-version { font-family: var(--mono); font-size: 11px; color: var(--gray-5); border: 1px solid var(--gray-7); padding: 2px 7px; }
+        .nav-center { font-family: var(--mono); font-size: 11px; color: var(--gray-5); letter-spacing: 0.08em; text-align: center; }
+        .back-link { font-family: var(--mono); font-size: 11px; color: var(--gray-3); text-decoration: none; text-align: right; display: block; letter-spacing: 0.05em; }
+        .back-link:hover { color: var(--black); }
+
+        /* HERO */
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 420px;
+            border-bottom: 1px solid var(--gray-7);
+        }
+
+        .hero-left {
+            padding: 72px 48px;
+            border-right: 1px solid var(--gray-7);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .hero-eyebrow {
+            font-family: var(--mono);
+            font-size: 11px;
+            letter-spacing: 0.12em;
+            color: var(--gray-3);
+            text-transform: uppercase;
+            margin-bottom: 32px;
+        }
+
+        .hero-h1 {
+            font-size: 3.8rem;
+            font-weight: 700;
+            letter-spacing: -0.04em;
+            line-height: 1.0;
+            color: var(--black);
+        }
+
+        .hero-right {
+            padding: 72px 48px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            gap: 32px;
+        }
+
+        .hero-desc {
+            font-size: 1.05rem;
+            font-weight: 300;
+            color: var(--gray-3);
+            max-width: 340px;
+            line-height: 1.7;
+        }
+
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--black);
+            color: var(--white);
+            padding: 14px 24px;
+            font-family: var(--mono);
+            font-size: 12px;
+            letter-spacing: 0.05em;
+            text-decoration: none;
+            width: fit-content;
+        }
+
+        .cta-btn:hover { background: var(--gray-1); }
+        .cta-arrow { font-size: 16px; }
+
+        /* SPEC GRID */
+        .spec-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            border-bottom: 1px solid var(--gray-7);
+        }
+
+        .spec-item {
+            padding: 32px 48px;
+            border-right: 1px solid var(--gray-7);
+        }
+
+        .spec-item:last-child { border-right: none; }
+
+        .spec-num {
+            font-family: var(--mono);
+            font-size: 10px;
+            color: var(--gray-5);
+            letter-spacing: 0.1em;
+            margin-bottom: 10px;
+        }
+
+        .spec-title {
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 6px;
+        }
+
+        .spec-desc {
+            font-size: 13px;
+            color: var(--gray-3);
+            font-weight: 300;
+            line-height: 1.6;
+        }
+
+        /* GALLERY */
+        .gallery-wrap {
+            background: var(--gray-8);
+            padding: 48px;
+        }
+
+        .gallery-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .gallery-label {
+            font-family: var(--mono);
+            font-size: 11px;
+            letter-spacing: 0.1em;
+            color: var(--gray-3);
+            text-transform: uppercase;
+        }
+
+        .search-wrap {
+            position: relative;
+            margin-bottom: 32px;
+        }
+
+        .search-prefix {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-family: var(--mono);
+            font-size: 13px;
+            color: var(--gray-5);
+            pointer-events: none;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 14px 16px 14px 36px;
+            font-family: var(--mono);
+            font-size: 13px;
+            border: 1px solid var(--gray-7);
+            background: var(--white);
+            color: var(--black);
+            outline: none;
+        }
+
+        input[type="text"]:focus { border-color: var(--black); }
+        input[type="text"]::placeholder { color: var(--gray-5); }
+
+        /* EMPTY STATE */
+        .empty-state {
+            border: 1px dashed var(--gray-5);
+            padding: 80px 48px;
+            text-align: center;
+            background: var(--white);
+        }
+
+        .empty-code {
+            font-family: var(--mono);
+            font-size: 12px;
+            color: var(--gray-5);
+            letter-spacing: 0.08em;
+            margin-bottom: 16px;
+        }
+
+        .empty-msg {
+            font-size: 14px;
+            font-weight: 300;
+            color: var(--gray-3);
+            margin-bottom: 32px;
+        }
+
+        .empty-btn {
+            display: inline-block;
+            border: 1px solid var(--black);
+            color: var(--black);
+            padding: 10px 24px;
+            font-family: var(--mono);
+            font-size: 12px;
+            text-decoration: none;
+            letter-spacing: 0.05em;
+        }
+
+        .empty-btn:hover { background: var(--black); color: var(--white); }
+
+        /* STATUS BAR */
+        .status-bar {
+            border-top: 1px solid var(--gray-7);
+            padding: 12px 48px;
+            display: flex;
+            gap: 32px;
+        }
+
+        .status-item {
+            font-family: var(--mono);
+            font-size: 11px;
+            color: var(--gray-5);
+        }
+
+        .status-item span { color: var(--gray-3); }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-left">
+            <span class="nav-logo">OnlineResume</span>
+            <span class="nav-version">v1.0</span>
+        </div>
+        <span class="nav-center">MINIMAL / INDEX</span>
+        <a href="layouts.html" class="back-link">← layouts</a>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-left">
+            <div class="hero-eyebrow">Interface · Type 01 · Minimal</div>
+            <h1 class="hero-h1">Plain Text.<br>Professional<br>Results.</h1>
+        </div>
+        <div class="hero-right">
+            <p class="hero-desc">A high-performance index interface for managing developer and professional resumes. No noise. Pure structure. Every field validated.</p>
+            <a href="#form" class="cta-btn">
+                Initialize document
+                <span class="cta-arrow">→</span>
+            </a>
+        </div>
+    </section>
+
+    <div class="spec-grid">
+        <div class="spec-item">
+            <div class="spec-num">01 / STRUCTURED</div>
+            <div class="spec-title">Schema-enforced</div>
+            <div class="spec-desc">Strict field validation on every entry. No freeform noise.</div>
+        </div>
+        <div class="spec-item">
+            <div class="spec-num">02 / INDEXED</div>
+            <div class="spec-title">Instant search</div>
+            <div class="spec-desc">Full-text and field-level filtering across the entire database.</div>
+        </div>
+        <div class="spec-item">
+            <div class="spec-num">03 / PERSISTENT</div>
+            <div class="spec-title">Local-first</div>
+            <div class="spec-desc">Data remains yours. No cloud dependency, no third-party sync.</div>
+        </div>
+    </div>
+
+    <div id="form" class="gallery-wrap">
+        <div class="gallery-header">
+            <span class="gallery-label">Index / All records</span>
+            <span class="gallery-label">0 documents</span>
+        </div>
+        <div class="search-wrap">
+            <span class="search-prefix">/</span>
+            <input type="text" placeholder="Filter by name, skill, or field...">
+        </div>
+        <div class="empty-state">
+            <div class="empty-code">ERR_EMPTY_INDEX · 0x00</div>
+            <p class="empty-msg">No documents found in this collection. Initialize a new record to begin.</p>
+            <a href="#" class="empty-btn">+ new document</a>
+        </div>
+    </div>
+
+    <div class="status-bar">
+        <span class="status-item">DB: <span>local://resume.db</span></span>
+        <span class="status-item">Records: <span>0</span></span>
+        <span class="status-item">Status: <span>ready</span></span>
+    </div>
+
+</body>
+</html>

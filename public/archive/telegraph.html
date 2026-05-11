@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OnlineResume | The Telegraph</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Source+Serif+4:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --ink: #1a1210;
+            --ink-mid: #3d3530;
+            --ink-faint: #7a6f68;
+            --paper: #f7f3ee;
+            --paper-warm: #ede8e0;
+            --rule: #c9bfb5;
+            --rule-heavy: #7a6f68;
+            --accent: #8b1a1a;
+        }
+
+        body {
+            font-family: 'Source Serif 4', Georgia, serif;
+            background: var(--paper);
+            color: var(--ink);
+            margin: 0;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        /* ─── MASTHEAD ─── */
+        .masthead {
+            border-bottom: 3px double var(--ink);
+            padding: 0 40px;
+        }
+
+        .masthead-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--rule);
+            font-size: 11px;
+            letter-spacing: 0.08em;
+            color: var(--ink-faint);
+            text-transform: uppercase;
+        }
+
+        .back-link {
+            font-size: 11px;
+            color: var(--ink-faint);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .back-link:hover { color: var(--accent); }
+
+        .masthead-title {
+            text-align: center;
+            padding: 18px 0 14px;
+        }
+
+        .masthead-title h1 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 4.8rem;
+            font-weight: 900;
+            letter-spacing: -0.02em;
+            line-height: 1;
+            color: var(--ink);
+        }
+
+        .masthead-rule {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 0;
+        }
+
+        .masthead-rule span {
+            font-size: 10px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--ink-faint);
+            white-space: nowrap;
+        }
+
+        .rule-line {
+            flex: 1;
+            height: 1px;
+            background: var(--rule);
+        }
+
+        /* ─── SECTION LABEL ─── */
+        .section-label {
+            font-size: 10px;
+            font-weight: 400;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--paper);
+            background: var(--ink);
+            display: inline-block;
+            padding: 3px 8px;
+            margin-bottom: 12px;
+        }
+
+        /* ─── BROADSHEET GRID ─── */
+        .broadsheet {
+            display: grid;
+            grid-template-columns: 2fr 1px 1fr 1px 1fr;
+            gap: 0;
+            padding: 30px 40px;
+            border-bottom: 2px solid var(--ink);
+        }
+
+        .col-divider {
+            background: var(--rule);
+            margin: 0 24px;
+        }
+
+        /* ─── LEAD STORY ─── */
+        .lead-story {}
+
+        .lead-kicker {
+            font-size: 10px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--accent);
+            font-weight: 400;
+            margin-bottom: 8px;
+        }
+
+        .lead-headline {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 2.6rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 12px;
+            color: var(--ink);
+        }
+
+        .lead-deck {
+            font-size: 1.05rem;
+            font-style: italic;
+            color: var(--ink-mid);
+            border-top: 1px solid var(--rule-heavy);
+            border-bottom: 1px solid var(--rule);
+            padding: 10px 0;
+            margin-bottom: 16px;
+            font-weight: 300;
+        }
+
+        .lead-body {
+            font-size: 14px;
+            line-height: 1.75;
+            color: var(--ink-mid);
+            column-count: 2;
+            column-gap: 24px;
+            column-rule: 1px solid var(--rule);
+        }
+
+        .lead-body p + p { text-indent: 1em; }
+
+        /* ─── SIDE COLUMNS ─── */
+        .side-col {}
+
+        .side-story {
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--rule);
+        }
+
+        .side-story:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .side-headline {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.15rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 6px;
+        }
+
+        .side-body {
+            font-size: 13px;
+            color: var(--ink-mid);
+            line-height: 1.65;
+        }
+
+        /* ─── INDEX BAR ─── */
+        .index-bar {
+            display: flex;
+            gap: 0;
+            border-bottom: 2px solid var(--ink);
+            background: var(--paper-warm);
+        }
+
+        .index-item {
+            flex: 1;
+            padding: 12px 20px;
+            border-right: 1px solid var(--rule);
+            font-size: 11px;
+            letter-spacing: 0.05em;
+        }
+
+        .index-item:last-child { border-right: none; }
+
+        .index-item strong {
+            display: block;
+            font-family: 'Playfair Display', serif;
+            font-size: 14px;
+            margin-bottom: 2px;
+        }
+
+        .index-item span { color: var(--ink-faint); }
+
+        /* ─── EMPTY STATE ─── */
+        .notices {
+            max-width: 700px;
+            margin: 50px auto;
+            padding: 0 40px 60px;
+            text-align: center;
+        }
+
+        .notice-box {
+            border: 1px solid var(--rule-heavy);
+            padding: 40px;
+            position: relative;
+            background: var(--paper);
+        }
+
+        .notice-box::before, .notice-box::after {
+            content: '';
+            position: absolute;
+            top: 4px; left: 4px; right: 4px; bottom: 4px;
+            border: 1px solid var(--rule);
+            pointer-events: none;
+        }
+
+        .notice-box::after {
+            top: 7px; left: 7px; right: 7px; bottom: 7px;
+        }
+
+        .notice-box h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-style: italic;
+            font-weight: 400;
+            margin-bottom: 12px;
+        }
+
+        .notice-box p {
+            font-size: 13.5px;
+            color: var(--ink-mid);
+            margin-bottom: 24px;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .notice-btn {
+            display: inline-block;
+            border: 1.5px solid var(--ink);
+            color: var(--ink);
+            padding: 10px 30px;
+            text-decoration: none;
+            font-size: 11px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            transition: background 0.15s, color 0.15s;
+        }
+
+        .notice-btn:hover {
+            background: var(--ink);
+            color: var(--paper);
+        }
+
+        /* ─── CLASSIFIEDS ROW ─── */
+        .classifieds {
+            border-top: 2px solid var(--ink);
+            padding: 20px 40px;
+            display: flex;
+            gap: 40px;
+            background: var(--paper-warm);
+        }
+
+        .classified-col { flex: 1; }
+
+        .classified-col h4 {
+            font-size: 9px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            border-bottom: 1px solid var(--rule-heavy);
+            padding-bottom: 4px;
+            margin-bottom: 8px;
+            color: var(--ink-faint);
+        }
+
+        .classified-item {
+            font-size: 12px;
+            line-height: 1.5;
+            color: var(--ink-mid);
+            margin-bottom: 6px;
+        }
+
+        .classified-item strong { color: var(--ink); font-weight: 400; }
+
+        /* ─── FOOTER ─── */
+        footer {
+            background: var(--ink);
+            color: rgba(247,243,238,0.5);
+            padding: 14px 40px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 10px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        footer a { color: rgba(247,243,238,0.5); text-decoration: none; }
+
+        .accent-rule {
+            border: none;
+            border-top: 3px solid var(--accent);
+            margin: 0 0 16px;
+        }
+
+        .drop-cap::first-letter {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.8em;
+            font-weight: 900;
+            float: left;
+            line-height: 0.75;
+            padding-right: 6px;
+            padding-top: 4px;
+            color: var(--ink);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- MASTHEAD -->
+    <header class="masthead">
+        <div class="masthead-top">
+            <a href="layouts.html" class="back-link">← Back to layouts</a>
+            <span>EST. 2025 · Professional Credentials Edition</span>
+            <span>Digital Broadsheet</span>
+        </div>
+        <div class="masthead-title">
+            <h1>The Telegraph</h1>
+        </div>
+        <div class="masthead-rule">
+            <div class="rule-line"></div>
+            <span>A Record of Distinguished Careers &amp; Professional Lives</span>
+            <div class="rule-line"></div>
+        </div>
+    </header>
+
+    <!-- INDEX BAR -->
+    <div class="index-bar">
+        <div class="index-item"><strong>Journalism</strong><span>Featured desk</span></div>
+        <div class="index-item"><strong>Academia</strong><span>Research &amp; letters</span></div>
+        <div class="index-item"><strong>Law &amp; Policy</strong><span>Counsel &amp; affairs</span></div>
+        <div class="index-item"><strong>Publishing</strong><span>Editors &amp; critics</span></div>
+        <div class="index-item"><strong>Civil Service</strong><span>Public record</span></div>
+    </div>
+
+    <!-- BROADSHEET BODY -->
+    <main class="broadsheet">
+
+        <!-- LEAD COLUMN -->
+        <article class="lead-story">
+            <div class="lead-kicker">Featured Profile</div>
+            <h2 class="lead-headline">A Platform Where Every Career Finds Its Proper Record</h2>
+            <p class="lead-deck">OnlineResume presents a new standard for professional credentials — structured, searchable, and worthy of the careers it documents.</p>
+            <div class="lead-body">
+                <p class="drop-cap">In an age of ephemeral digital presence, the professional record has grown fragmented. Credentials scatter across platforms; careers go undocumented; expertise vanishes. OnlineResume proposes a remedy: a single, authoritative ledger of professional lives.</p>
+                <p>The platform is designed for those whose careers demand more than a bullet-pointed list — journalists who have shaped opinion, academics whose research endures, civil servants whose quiet work sustains institutions.</p>
+                <p>Each profile is structured as a record of fact: positions held, works published, affiliations maintained. The format owes more to the biographical dictionary than the social network.</p>
+                <p>No endorsements. No connections. No algorithmic noise. Only the careful accumulation of a professional life, set in type.</p>
+            </div>
+        </article>
+
+        <div class="col-divider"></div>
+
+        <!-- MIDDLE COLUMN -->
+        <div class="side-col">
+            <div class="section-label">Features</div>
+            <article class="side-story">
+                <hr class="accent-rule">
+                <h3 class="side-headline">Structured for Longevity, Not Virality</h3>
+                <p class="side-body">Profiles are built around verified facts. Date ranges, institutions, and publication records form the core — not endorsements or connection counts.</p>
+            </article>
+            <article class="side-story">
+                <h3 class="side-headline">Searchable by Field, Institution, and Decade</h3>
+                <p class="side-body">The index is organized around the structure of professional life itself: discipline, employer, tenure. Find a colleague from 1987 or a specialist in Angolan labour law.</p>
+            </article>
+            <article class="side-story">
+                <h3 class="side-headline">Printable to Archival Standard</h3>
+                <p class="side-body">Every profile generates a clean, print-ready document formatted to the conventions of academic and legal CVs.</p>
+            </article>
+        </div>
+
+        <div class="col-divider"></div>
+
+        <!-- FAR COLUMN -->
+        <div class="side-col">
+            <div class="section-label">Notice</div>
+            <article class="side-story">
+                <hr class="accent-rule">
+                <h3 class="side-headline" style="font-style: italic; font-weight: 400;">Awaiting First Submission</h3>
+                <p class="side-body">The record stands empty. No profiles have yet been submitted to the archive. We await the first entry with appropriate patience.</p>
+                <br>
+                <p class="side-body">Those wishing to establish a record may do so at any time. The archive accepts all professions and all tenures, however brief.</p>
+            </article>
+            <article class="side-story">
+                <h3 class="side-headline">Submissions</h3>
+                <p class="side-body">Accepted in plain text, PDF, or structured form. No photograph required. No social links solicited.</p>
+            </article>
+        </div>
+
+    </main>
+
+    <!-- EMPTY STATE / NOTICES -->
+    <section class="notices">
+        <div class="notice-box">
+            <h2>The Archive Awaits Its First Entry</h2>
+            <p>No professional records have been submitted. The ledger is open and the index is unwritten. Submit your record to begin the archive.</p>
+            <a href="#" class="notice-btn">Submit Your Record</a>
+        </div>
+    </section>
+
+    <!-- CLASSIFIEDS -->
+    <div class="classifieds">
+        <div class="classified-col">
+            <h4>Disciplines Accepted</h4>
+            <div class="classified-item"><strong>Journalism & Media</strong> — Print, broadcast, and digital</div>
+            <div class="classified-item"><strong>Law & Policy</strong> — Counsel, judiciary, civil service</div>
+            <div class="classified-item"><strong>Academia</strong> — Research, teaching, administration</div>
+        </div>
+        <div class="classified-col">
+            <h4>Standards</h4>
+            <div class="classified-item">All entries verified against submitted documentation. No self-reported credentials accepted without institutional confirmation.</div>
+        </div>
+        <div class="classified-col">
+            <h4>Archive Notes</h4>
+            <div class="classified-item">Records retained in perpetuity. Amendments accepted with notation. Withdrawals recorded, not deleted.</div>
+        </div>
+    </div>
+
+    <footer>
+        <span>The Telegraph · OnlineResume</span>
+        <span>All professional records are verified at time of submission</span>
+        <span><a href="layouts.html">← Return to layouts</a></span>
+    </footer>
+
+</body>
+</html>

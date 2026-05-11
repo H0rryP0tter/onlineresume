@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OnlineResume | The Journal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --ink: #1c1a18;
+            --ink-mid: #3e3b36;
+            --ink-faint: #8a8278;
+            --paper: #faf7f2;
+            --paper-warm: #f0ebe1;
+            --rule: #d9d1c5;
+            --accent: #7c4d2f;
+        }
+
+        body {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            background: var(--paper);
+            color: var(--ink);
+            margin: 0;
+        }
+
+        /* HEADER */
+        .site-header {
+            border-bottom: 1px solid var(--rule);
+            padding: 0 60px;
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 0;
+            border-bottom: 1px solid var(--rule);
+            font-family: 'Jost', sans-serif;
+            font-size: 11px;
+            letter-spacing: 0.1em;
+            color: var(--ink-faint);
+            text-transform: uppercase;
+        }
+
+        .back-link {
+            font-family: 'Jost', sans-serif;
+            font-size: 11px;
+            color: var(--ink-faint);
+            text-decoration: none;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .back-link:hover { color: var(--accent); }
+
+        .site-title {
+            text-align: center;
+            padding: 36px 0 28px;
+        }
+
+        .site-title h1 {
+            font-size: 5rem;
+            font-weight: 300;
+            letter-spacing: 0.12em;
+            color: var(--ink);
+            font-style: italic;
+        }
+
+        .site-title .subtitle {
+            font-family: 'Jost', sans-serif;
+            font-size: 11px;
+            letter-spacing: 0.2em;
+            color: var(--ink-faint);
+            text-transform: uppercase;
+            margin-top: 10px;
+        }
+
+        /* HERO */
+        .hero {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 80px 40px 60px;
+            text-align: center;
+            border-bottom: 1px solid var(--rule);
+        }
+
+        .issue-label {
+            font-family: 'Jost', sans-serif;
+            font-size: 10px;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 28px;
+        }
+
+        .hero-headline {
+            font-size: 3.4rem;
+            font-weight: 300;
+            line-height: 1.15;
+            color: var(--ink);
+            margin-bottom: 24px;
+        }
+
+        .hero-deck {
+            font-size: 1.25rem;
+            font-style: italic;
+            font-weight: 300;
+            color: var(--ink-mid);
+            line-height: 1.7;
+            margin-bottom: 36px;
+            max-width: 520px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .ornament {
+            color: var(--accent);
+            font-size: 1.4rem;
+            margin: 0 12px;
+            opacity: 0.6;
+        }
+
+        .cta-link {
+            display: inline-block;
+            font-family: 'Jost', sans-serif;
+            font-size: 12px;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--ink);
+            text-decoration: none;
+            border-bottom: 1px solid var(--ink);
+            padding-bottom: 3px;
+        }
+
+        .cta-link:hover { color: var(--accent); border-color: var(--accent); }
+
+        /* THREE STEPS */
+        .steps-section {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 40px;
+            border-bottom: 1px solid var(--rule);
+        }
+
+        .step {
+            padding: 50px 40px 50px 0;
+            border-right: 1px solid var(--rule);
+        }
+
+        .step:last-child { border-right: none; padding-right: 0; padding-left: 40px; }
+        .step:nth-child(2) { padding-left: 40px; }
+
+        .step-num {
+            font-family: 'Jost', sans-serif;
+            font-size: 10px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--ink-faint);
+            margin-bottom: 14px;
+        }
+
+        .step-title {
+            font-size: 1.5rem;
+            font-style: italic;
+            font-weight: 400;
+            color: var(--ink);
+            margin-bottom: 10px;
+        }
+
+        .step-desc {
+            font-size: 14px;
+            font-weight: 300;
+            color: var(--ink-mid);
+            line-height: 1.75;
+        }
+
+        /* QUOTE PULL */
+        .pull-quote {
+            max-width: 600px;
+            margin: 60px auto;
+            padding: 0 60px;
+            text-align: center;
+        }
+
+        .pull-text {
+            font-size: 1.6rem;
+            font-style: italic;
+            font-weight: 300;
+            color: var(--ink-mid);
+            line-height: 1.55;
+        }
+
+        .pull-rule {
+            width: 48px;
+            height: 1px;
+            background: var(--accent);
+            margin: 24px auto 0;
+        }
+
+        /* EMPTY STATE */
+        .empty-wrap {
+            background: var(--paper-warm);
+            margin: 0 60px 60px;
+            border: 1px solid var(--rule);
+        }
+
+        .empty-inner {
+            padding: 80px;
+            text-align: center;
+        }
+
+        .empty-ornament {
+            font-size: 2.5rem;
+            color: var(--rule);
+            margin-bottom: 24px;
+        }
+
+        .empty-heading {
+            font-size: 2rem;
+            font-style: italic;
+            font-weight: 300;
+            color: var(--ink-mid);
+            margin-bottom: 16px;
+        }
+
+        .empty-body {
+            font-size: 1.05rem;
+            font-weight: 300;
+            font-style: italic;
+            color: var(--ink-faint);
+            margin-bottom: 40px;
+            max-width: 440px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.75;
+        }
+
+        .empty-btn {
+            display: inline-block;
+            font-family: 'Jost', sans-serif;
+            font-size: 11px;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--ink);
+            text-decoration: none;
+            border: 1px solid var(--ink-faint);
+            padding: 12px 32px;
+        }
+
+        .empty-btn:hover { border-color: var(--ink); background: var(--ink); color: var(--paper); }
+
+        /* FOOTER */
+        footer {
+            border-top: 2px solid var(--ink);
+            padding: 20px 60px;
+            display: flex;
+            justify-content: space-between;
+            font-family: 'Jost', sans-serif;
+            font-size: 10px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--ink-faint);
+        }
+    </style>
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="header-top">
+            <a href="layouts.html" class="back-link">← Back to layouts</a>
+            <span>The Journal of Professional Lives</span>
+            <span>No. 1 · Open Edition</span>
+        </div>
+        <div class="site-title">
+            <h1>The Journal</h1>
+            <p class="subtitle">An archive of professional lives · Timeless · Open to all</p>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="issue-label">◆ Featured Entry ◆</div>
+        <h2 class="hero-headline">Every Life<br>has a Story.</h2>
+        <p class="hero-deck">A quiet, enduring space to set down your professional journey — whatever the trade, whatever the decade, whoever you are.</p>
+        <div style="margin-bottom: 36px;">
+            <span class="ornament">✦</span>
+            <span class="ornament">✦</span>
+            <span class="ornament">✦</span>
+        </div>
+        <a href="#form" class="cta-link">Begin Your Record</a>
+    </section>
+
+    <div class="steps-section">
+        <div class="step">
+            <div class="step-num">I. Reflect</div>
+            <div class="step-title">Take stock</div>
+            <p class="step-desc">Consider the skills you've gathered — from trades learned young to technologies mastered late.</p>
+        </div>
+        <div class="step">
+            <div class="step-num">II. Record</div>
+            <div class="step-title">Set it down</div>
+            <p class="step-desc">Commit your history to the digital page. Permanent, searchable, and always yours.</p>
+        </div>
+        <div class="step">
+            <div class="step-num">III. Share</div>
+            <div class="step-title">Let it travel</div>
+            <p class="step-desc">Let the world find your particular expertise, wherever they happen to be looking.</p>
+        </div>
+    </div>
+
+    <div class="pull-quote">
+        <p class="pull-text">"The career, however modest, deserves its proper record."</p>
+        <div class="pull-rule"></div>
+    </div>
+
+    <div id="form" class="empty-wrap">
+        <div class="empty-inner">
+            <div class="empty-ornament">◇</div>
+            <h3 class="empty-heading">The ledger is blank.</h3>
+            <p class="empty-body">No stories have been entered yet. The pages await the first voice — the first trade noted, the first career given its rightful place.</p>
+            <a href="#" class="empty-btn">Begin the first entry</a>
+        </div>
+    </div>
+
+    <footer>
+        <span>OnlineResume · The Journal</span>
+        <span>All trades welcome · All careers honoured</span>
+        <span><a href="layouts.html" style="color:inherit; text-decoration:none;">← Layouts</a></span>
+    </footer>
+
+</body>
+</html>

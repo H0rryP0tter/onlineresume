@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OnlineResume | The Clinic</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=IBM+Plex+Serif:ital,wght@0,300;0,400;1,400&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --navy: #0a2140;
+            --blue: #1a6bba;
+            --blue-mid: #2478c8;
+            --blue-pale: #e8f2fb;
+            --teal: #0d8c7e;
+            --teal-pale: #e4f5f2;
+            --white: #ffffff;
+            --off-white: #f5f8fc;
+            --border: #dce8f5;
+            --text: #1a2d40;
+            --muted: #5a7290;
+            --light: #8eaac5;
+        }
+
+        body {
+            font-family: 'IBM Plex Sans', sans-serif;
+            background: var(--off-white);
+            color: var(--text);
+            margin: 0;
+        }
+
+        /* TOP ALERT BAR */
+        .alert-bar {
+            background: var(--teal);
+            padding: 8px 48px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .alert-text {
+            font-size: 12px;
+            color: rgba(255,255,255,0.9);
+            letter-spacing: 0.04em;
+        }
+
+        .alert-badge {
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            background: rgba(255,255,255,0.15);
+            color: white;
+            padding: 3px 10px;
+            border-radius: 3px;
+        }
+
+        /* HEADER */
+        .site-header {
+            background: var(--white);
+            border-bottom: 3px solid var(--navy);
+            padding: 0 48px;
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 64px;
+        }
+
+        .logo-group {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .logo-mark {
+            width: 36px;
+            height: 36px;
+            background: var(--navy);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 14px;
+            letter-spacing: -0.02em;
+            border-radius: 6px;
+        }
+
+        .logo-text {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--navy);
+            letter-spacing: -0.01em;
+        }
+
+        .logo-sub {
+            font-size: 11px;
+            color: var(--muted);
+            font-weight: 400;
+        }
+
+        .back-link {
+            font-size: 12px;
+            color: var(--muted);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .back-link:hover { color: var(--blue); }
+
+        .header-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            color: var(--teal);
+            font-weight: 500;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--teal);
+            border-radius: 50%;
+        }
+
+        /* NAV */
+        .nav-strip {
+            display: flex;
+            border-top: 1px solid var(--border);
+        }
+
+        .nav-item {
+            padding: 10px 24px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            color: var(--muted);
+            text-decoration: none;
+            border-right: 1px solid var(--border);
+        }
+
+        .nav-item:hover { color: var(--blue); background: var(--blue-pale); }
+
+        /* HERO */
+        .hero {
+            background: linear-gradient(165deg, var(--navy) 0%, #163560 100%);
+            padding: 80px 60px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            border-bottom: 4px solid var(--blue-mid);
+        }
+
+        .hero-left {}
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(26,107,186,0.2);
+            border: 1px solid rgba(36,120,200,0.3);
+            border-radius: 4px;
+            padding: 6px 14px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #7fb8e8;
+            margin-bottom: 24px;
+        }
+
+        .hero h1 {
+            font-family: 'IBM Plex Serif', serif;
+            font-size: 3.2rem;
+            font-weight: 400;
+            color: white;
+            line-height: 1.15;
+            margin-bottom: 20px;
+            letter-spacing: -0.01em;
+        }
+
+        .hero p {
+            font-size: 15px;
+            color: rgba(255,255,255,0.7);
+            font-weight: 300;
+            line-height: 1.75;
+            margin-bottom: 36px;
+        }
+
+        .hero-cta {
+            display: inline-block;
+            background: var(--blue-mid);
+            color: white;
+            padding: 15px 36px;
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+            letter-spacing: 0.04em;
+            border-radius: 4px;
+        }
+
+        .hero-cta:hover { background: var(--blue); }
+
+        .hero-right {}
+
+        .credential-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .cred-card {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 18px 22px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .cred-icon {
+            width: 38px;
+            height: 38px;
+            background: rgba(36,120,200,0.2);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .cred-title { font-size: 13px; font-weight: 600; color: white; margin-bottom: 3px; }
+        .cred-desc { font-size: 12px; color: rgba(255,255,255,0.5); font-weight: 300; }
+
+        /* STATS */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            background: var(--white);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .stat {
+            padding: 24px 28px;
+            border-right: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .stat:last-child { border-right: none; }
+
+        .stat-num {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--blue);
+            margin-bottom: 4px;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .stat-label {
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--light);
+        }
+
+        /* EMPTY */
+        .empty-section {
+            padding: 60px 48px 80px;
+        }
+
+        .empty-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .empty-label {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--muted);
+        }
+
+        .filter-row {
+            display: flex;
+            gap: 8px;
+        }
+
+        .filter-btn {
+            background: var(--white);
+            border: 1px solid var(--border);
+            padding: 7px 16px;
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--muted);
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'IBM Plex Sans', sans-serif;
+        }
+
+        .empty-state {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 80px 60px;
+            text-align: center;
+        }
+
+        .empty-cross {
+            width: 64px;
+            height: 64px;
+            background: var(--blue-pale);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 28px;
+            font-size: 28px;
+        }
+
+        .empty-h2 {
+            font-family: 'IBM Plex Serif', serif;
+            font-size: 1.6rem;
+            font-weight: 400;
+            color: var(--navy);
+            margin-bottom: 12px;
+        }
+
+        .empty-body {
+            font-size: 14px;
+            color: var(--muted);
+            font-weight: 300;
+            line-height: 1.75;
+            max-width: 440px;
+            margin: 0 auto 36px;
+        }
+
+        .empty-btn {
+            display: inline-block;
+            background: var(--navy);
+            color: white;
+            padding: 14px 36px;
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+
+        .empty-btn:hover { background: var(--blue); }
+
+        /* FOOTER */
+        footer {
+            background: var(--navy);
+            padding: 20px 48px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        footer span {
+            font-size: 11px;
+            color: rgba(255,255,255,0.35);
+            letter-spacing: 0.06em;
+        }
+
+        footer strong { color: rgba(255,255,255,0.7); font-size: 13px; }
+    </style>
+</head>
+<body>
+
+    <div class="alert-bar">
+        <span class="alert-text">All credentials are verified at time of registration. For professional use only.</span>
+        <span class="alert-badge">Verified Portal</span>
+    </div>
+
+    <header class="site-header">
+        <div class="header-inner">
+            <div class="logo-group">
+                <div class="logo-mark">Rx</div>
+                <div>
+                    <div class="logo-text">MedResume</div>
+                    <div class="logo-sub">Professional Credentials Portal</div>
+                </div>
+            </div>
+            <a href="layouts.html" class="back-link">← Back to layouts</a>
+            <div class="header-status">
+                <div class="status-dot"></div>
+                System operational
+            </div>
+        </div>
+        <nav class="nav-strip">
+            <a href="#" class="nav-item">Practitioners</a>
+            <a href="#" class="nav-item">Specialists</a>
+            <a href="#" class="nav-item">Allied Health</a>
+            <a href="#" class="nav-item">Research</a>
+            <a href="#" class="nav-item">Register</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-left">
+            <div class="hero-badge">⊕ Verified Care</div>
+            <h1>Trusted<br>Medical<br>Credentials.</h1>
+            <p>A secure portal for medical and allied health professionals to publish, verify, and share their qualifications with the institutions and patients who need them.</p>
+            <a href="#empty" class="hero-cta">Register Credentials</a>
+        </div>
+        <div class="hero-right">
+            <div class="credential-cards">
+                <div class="cred-card">
+                    <div class="cred-icon">🩺</div>
+                    <div>
+                        <div class="cred-title">Practitioner Licence</div>
+                        <div class="cred-desc">Board registration, specialisation, and practice scope</div>
+                    </div>
+                </div>
+                <div class="cred-card">
+                    <div class="cred-icon">🎓</div>
+                    <div>
+                        <div class="cred-title">Academic Record</div>
+                        <div class="cred-desc">Degrees, fellowships, and continued medical education</div>
+                    </div>
+                </div>
+                <div class="cred-card">
+                    <div class="cred-icon">📋</div>
+                    <div>
+                        <div class="cred-title">Clinical Experience</div>
+                        <div class="cred-desc">Hospital affiliations, departments, and tenure</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="stats-row">
+        <div class="stat">
+            <div class="stat-num">0</div>
+            <div class="stat-label">Practitioners</div>
+        </div>
+        <div class="stat">
+            <div class="stat-num">0</div>
+            <div class="stat-label">Specialties</div>
+        </div>
+        <div class="stat">
+            <div class="stat-num">0</div>
+            <div class="stat-label">Institutions</div>
+        </div>
+        <div class="stat">
+            <div class="stat-num">100%</div>
+            <div class="stat-label">Verification rate</div>
+        </div>
+    </div>
+
+    <div id="empty" class="empty-section">
+        <div class="empty-header">
+            <span class="empty-label">Practitioner Registry</span>
+            <div class="filter-row">
+                <button class="filter-btn">All specialties</button>
+                <button class="filter-btn">Location</button>
+                <button class="filter-btn">Availability</button>
+            </div>
+        </div>
+        <div class="empty-state">
+            <div class="empty-cross">⊕</div>
+            <h2 class="empty-h2">No practitioners registered yet.</h2>
+            <p class="empty-body">The system is ready to receive credentials. No profiles have been submitted. Register your qualifications to appear in the verified directory.</p>
+            <a href="#" class="empty-btn">Register your credentials</a>
+        </div>
+    </div>
+
+    <footer>
+        <strong>MedResume</strong>
+        <span>OnlineResume · Medical Professionals Edition · All credentials verified</span>
+        <span><a href="layouts.html" style="color:inherit;text-decoration:none;">← Layouts</a></span>
+    </footer>
+
+</body>
+</html>

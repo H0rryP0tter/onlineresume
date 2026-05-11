@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OnlineResume | The Studio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Urbanist:ital,wght@0,200;0,300;0,400;0,600;1,200;1,300&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --black: #000000;
+            --near-black: #0c0c0c;
+            --dark: #141414;
+            --surface: #1c1c1c;
+            --border: #2e2e2e;
+            --white: #ffffff;
+            --off-white: #e8e5e0;
+            --grey: #888888;
+            --grey-mid: #555555;
+            --accent: #c8a96e;
+        }
+
+        body {
+            font-family: 'Urbanist', sans-serif;
+            background: var(--black);
+            color: var(--off-white);
+            margin: 0;
+        }
+
+        /* BACK LINK */
+        .back-link {
+            position: absolute;
+            top: 20px;
+            left: 24px;
+            font-size: 11px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.4);
+            text-decoration: none;
+            z-index: 20;
+            font-weight: 600;
+        }
+
+        .back-link:hover { color: rgba(255,255,255,0.8); }
+
+        /* HERO */
+        .hero {
+            position: relative;
+            height: 100vh;
+            min-height: 600px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 0 72px 80px;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.2) 100%),
+                url('https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero-content { position: relative; z-index: 2; }
+
+        .hero-eyebrow {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.24em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 9rem;
+            font-weight: 400;
+            color: var(--white);
+            line-height: 0.9;
+            letter-spacing: 0.02em;
+            margin-bottom: 28px;
+        }
+
+        .hero-sub {
+            font-size: 1.1rem;
+            font-weight: 200;
+            color: rgba(255,255,255,0.6);
+            font-style: italic;
+            margin-bottom: 48px;
+            max-width: 500px;
+            line-height: 1.7;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .cta-primary {
+            display: inline-block;
+            border: 1.5px solid var(--white);
+            color: var(--white);
+            padding: 16px 44px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            text-decoration: none;
+        }
+
+        .cta-primary:hover { background: var(--white); color: var(--black); }
+
+        .cta-ghost {
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.45);
+            text-decoration: none;
+        }
+
+        .cta-ghost:hover { color: var(--white); }
+
+        /* HERO SCROLL INDICATOR */
+        .scroll-line {
+            position: absolute;
+            right: 40px;
+            bottom: 80px;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .scroll-label {
+            font-size: 9px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.3);
+            writing-mode: vertical-lr;
+        }
+
+        .scroll-bar {
+            width: 1px;
+            height: 60px;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.3), transparent);
+        }
+
+        /* CATEGORY ROW */
+        .categories {
+            display: flex;
+            width: 100%;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .cat {
+            flex: 1;
+            padding: 28px;
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .cat:last-child { border-right: none; }
+        .cat:hover { background: var(--surface); }
+
+        .cat-number {
+            font-size: 10px;
+            letter-spacing: 0.16em;
+            color: var(--grey-mid);
+            text-transform: uppercase;
+        }
+
+        .cat-name {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.6rem;
+            color: var(--off-white);
+            letter-spacing: 0.04em;
+        }
+
+        .cat-desc {
+            font-size: 12px;
+            color: var(--grey);
+            font-weight: 300;
+            line-height: 1.5;
+        }
+
+        .cat-count {
+            font-size: 11px;
+            color: var(--accent);
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            margin-top: 4px;
+        }
+
+        /* FEATURED SECTION */
+        .featured-section {
+            padding: 72px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 48px;
+        }
+
+        .section-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.8rem;
+            color: var(--white);
+            letter-spacing: 0.04em;
+        }
+
+        .section-action {
+            font-size: 11px;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* EMPTY STATE */
+        .empty-state {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 100px 60px;
+            text-align: center;
+            min-height: 320px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .empty-frame {
+            width: 80px;
+            height: 80px;
+            border: 1.5px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 32px;
+            position: relative;
+        }
+
+        .empty-frame::before, .empty-frame::after {
+            content: '';
+            position: absolute;
+            background: var(--grey-mid);
+        }
+
+        .empty-frame::before { width: 1px; height: 100%; }
+        .empty-frame::after { width: 100%; height: 1px; }
+
+        .empty-heading {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.4rem;
+            color: var(--white);
+            letter-spacing: 0.04em;
+            margin-bottom: 12px;
+        }
+
+        .empty-body {
+            font-size: 15px;
+            color: var(--grey);
+            font-weight: 200;
+            font-style: italic;
+            line-height: 1.75;
+            max-width: 380px;
+            margin: 0 auto 40px;
+        }
+
+        .empty-btn {
+            display: inline-block;
+            border: 1.5px solid var(--accent);
+            color: var(--accent);
+            padding: 14px 40px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            text-decoration: none;
+        }
+
+        .empty-btn:hover { background: var(--accent); color: var(--black); }
+
+        /* FOOTER */
+        footer {
+            background: var(--near-black);
+            border-top: 1px solid var(--border);
+            padding: 24px 72px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-name {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.3rem;
+            letter-spacing: 0.08em;
+            color: var(--grey-mid);
+        }
+
+        footer span {
+            font-size: 11px;
+            color: var(--grey-mid);
+            letter-spacing: 0.06em;
+        }
+    </style>
+</head>
+<body>
+
+    <section class="hero">
+        <a href="layouts.html" class="back-link">← layouts</a>
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <div class="hero-eyebrow">◆ Creative Professionals</div>
+            <h1>The<br>Studio.</h1>
+            <p class="hero-sub">Where masterpieces find their makers. A portfolio platform for cinema, fine art, and photography — built to show work, not just describe it.</p>
+            <div class="hero-actions">
+                <a href="#gallery" class="cta-primary">Create Your Portfolio</a>
+                <a href="#" class="cta-ghost">Browse work →</a>
+            </div>
+        </div>
+        <div class="scroll-line">
+            <div class="scroll-bar"></div>
+            <span class="scroll-label">Scroll</span>
+        </div>
+    </section>
+
+    <div class="categories">
+        <div class="cat">
+            <span class="cat-number">01</span>
+            <span class="cat-name">Cinema</span>
+            <span class="cat-desc">Directors, DPs, editors, sound designers</span>
+            <span class="cat-count">0 profiles</span>
+        </div>
+        <div class="cat">
+            <span class="cat-number">02</span>
+            <span class="cat-name">Fine Art</span>
+            <span class="cat-desc">Painters, sculptors, installation artists</span>
+            <span class="cat-count">0 profiles</span>
+        </div>
+        <div class="cat">
+            <span class="cat-number">03</span>
+            <span class="cat-name">Photography</span>
+            <span class="cat-desc">Editorial, commercial, documentary</span>
+            <span class="cat-count">0 profiles</span>
+        </div>
+        <div class="cat">
+            <span class="cat-number">04</span>
+            <span class="cat-name">Design</span>
+            <span class="cat-desc">Graphic, motion, spatial, product</span>
+            <span class="cat-count">0 profiles</span>
+        </div>
+    </div>
+
+    <div id="gallery" class="featured-section">
+        <div class="section-header">
+            <span class="section-title">Featured Work</span>
+            <a href="#" class="section-action">Submit yours →</a>
+        </div>
+        <div class="empty-state">
+            <div class="empty-frame"></div>
+            <h2 class="empty-heading">A Blank Canvas Awaits.</h2>
+            <p class="empty-body">No portfolios have been submitted yet. The gallery is open and the light is right. Upload your vision and claim the first frame.</p>
+            <a href="#" class="empty-btn">Upload my work</a>
+        </div>
+    </div>
+
+    <footer>
+        <span class="footer-name">The Studio</span>
+        <span>OnlineResume · Creative Professionals Edition</span>
+        <span><a href="layouts.html" style="color:inherit;text-decoration:none;">← Layouts</a></span>
+    </footer>
+
+</body>
+</html>

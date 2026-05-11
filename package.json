@@ -1,0 +1,30 @@
+{
+  "name": "onlineresume",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "node test/run-tests.js",
+    "start": "node server.js",
+    "seed:countries": "node scripts/seed-country-calling-codes.js",
+    "seed:phone-rules": "node scripts/seed-phone-number-rules.js",
+    "seed:timezones": "node scripts/seed-time-zones.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "express-rate-limit": "^8.5.1",
+    "helmet": "^8.1.0",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.6.1"
+  },
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  }
+}

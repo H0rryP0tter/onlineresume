@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OnlineResume | The Ledger</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Mulish:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --navy: #1a2744;
+            --navy-mid: #233266;
+            --green: #1a7a4a;
+            --green-mid: #22a362;
+            --green-pale: #e8f7ef;
+            --white: #ffffff;
+            --off-white: #f6f8fa;
+            --warm-grey: #f0f0ee;
+            --rule: #dde3ea;
+            --text: #1a2030;
+            --muted: #606878;
+            --light: #9aa5b4;
+        }
+
+        body {
+            font-family: 'Mulish', sans-serif;
+            background: var(--off-white);
+            color: var(--text);
+            margin: 0;
+        }
+
+        /* TOP BAR */
+        .top-bar {
+            background: var(--navy);
+            padding: 10px 48px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .top-bar-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .tb-logo {
+            font-family: 'Crimson Pro', serif;
+            font-size: 17px;
+            font-weight: 600;
+            color: white;
+            letter-spacing: 0.03em;
+        }
+
+        .tb-divider {
+            width: 1px;
+            height: 18px;
+            background: rgba(255,255,255,0.15);
+        }
+
+        .tb-meta {
+            font-size: 11px;
+            font-weight: 300;
+            color: rgba(255,255,255,0.45);
+            letter-spacing: 0.06em;
+        }
+
+        .back-link {
+            font-size: 11px;
+            color: rgba(255,255,255,0.45);
+            text-decoration: none;
+            letter-spacing: 0.06em;
+        }
+
+        .back-link:hover { color: rgba(255,255,255,0.8); }
+
+        /* HERO */
+        .hero {
+            background: var(--white);
+            border-bottom: 4px solid var(--green);
+            padding: 72px 60px 60px;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 80px;
+            align-items: flex-end;
+        }
+
+        .hero-left {}
+
+        .hero-eyebrow {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--green);
+            margin-bottom: 16px;
+        }
+
+        .hero h1 {
+            font-family: 'Crimson Pro', Georgia, serif;
+            font-size: 4rem;
+            font-weight: 600;
+            color: var(--navy);
+            line-height: 1.1;
+            margin-bottom: 16px;
+            letter-spacing: -0.01em;
+        }
+
+        .hero p {
+            font-size: 15px;
+            color: var(--muted);
+            font-weight: 300;
+            line-height: 1.75;
+            max-width: 520px;
+            margin-bottom: 36px;
+        }
+
+        .hero-cta {
+            display: inline-block;
+            background: var(--navy);
+            color: white;
+            padding: 14px 36px;
+            font-size: 13px;
+            font-weight: 700;
+            text-decoration: none;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+
+        .hero-cta:hover { background: var(--navy-mid); }
+
+        .hero-right {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            border: 1px solid var(--rule);
+            min-width: 220px;
+        }
+
+        .ledger-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 20px;
+            border-bottom: 1px solid var(--rule);
+            font-size: 13px;
+        }
+
+        .ledger-row:last-child { border-bottom: none; }
+
+        .ledger-key {
+            color: var(--muted);
+            font-weight: 400;
+        }
+
+        .ledger-val {
+            font-weight: 700;
+            font-family: 'Crimson Pro', serif;
+            font-size: 15px;
+        }
+
+        .val-green { color: var(--green); }
+        .val-navy { color: var(--navy); }
+        .val-zero { color: var(--light); }
+
+        .ledger-header {
+            background: var(--navy);
+            padding: 10px 20px;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.6);
+        }
+
+        /* STATS STRIP */
+        .stats-strip {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            background: var(--green);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .stat {
+            padding: 20px 28px;
+            border-right: 1px solid rgba(255,255,255,0.15);
+            text-align: center;
+        }
+
+        .stat:last-child { border-right: none; }
+
+        .stat-num {
+            font-family: 'Crimson Pro', serif;
+            font-size: 2rem;
+            font-weight: 600;
+            color: white;
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.65);
+        }
+
+        /* EXPERTISE */
+        .expertise-section {
+            padding: 48px 60px;
+            background: var(--white);
+            border-bottom: 1px solid var(--rule);
+        }
+
+        .section-label {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--light);
+            margin-bottom: 24px;
+        }
+
+        .expertise-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+
+        .expertise-item {
+            border: 1px solid var(--rule);
+            padding: 20px;
+            background: var(--off-white);
+        }
+
+        .expertise-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 4px;
+        }
+
+        .expertise-sub {
+            font-size: 12px;
+            color: var(--light);
+            font-weight: 300;
+        }
+
+        /* EMPTY STATE */
+        .empty-section {
+            padding: 60px;
+        }
+
+        .empty-label {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--light);
+            margin-bottom: 24px;
+        }
+
+        .empty-state {
+            background: var(--white);
+            border: 1px solid var(--rule);
+            padding: 80px 60px;
+            text-align: center;
+        }
+
+        .empty-ledger-icon {
+            font-family: 'Crimson Pro', serif;
+            font-size: 3rem;
+            font-weight: 300;
+            font-style: italic;
+            color: var(--rule);
+            margin-bottom: 20px;
+        }
+
+        .empty-h2 {
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.8rem;
+            font-weight: 400;
+            color: var(--navy);
+            margin-bottom: 12px;
+        }
+
+        .empty-body {
+            font-size: 14px;
+            color: var(--muted);
+            font-weight: 300;
+            line-height: 1.75;
+            max-width: 420px;
+            margin: 0 auto 36px;
+        }
+
+        .empty-btn {
+            display: inline-block;
+            background: var(--green);
+            color: white;
+            padding: 14px 40px;
+            font-size: 12px;
+            font-weight: 700;
+            text-decoration: none;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .empty-btn:hover { background: var(--green-mid); }
+
+        /* FOOTER */
+        footer {
+            background: var(--navy);
+            padding: 18px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 3px solid var(--green);
+        }
+
+        footer span {
+            font-size: 11px;
+            color: rgba(255,255,255,0.35);
+            letter-spacing: 0.06em;
+        }
+
+        footer strong {
+            font-family: 'Crimson Pro', serif;
+            color: rgba(255,255,255,0.7);
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <div class="top-bar-left">
+            <span class="tb-logo">The Ledger</span>
+            <div class="tb-divider"></div>
+            <span class="tb-meta">Fiscal Year 2026 · Professional Registry</span>
+        </div>
+        <a href="layouts.html" class="back-link">← Back to layouts</a>
+        <span class="tb-meta">Audit-ready · GST Compliant</span>
+    </div>
+
+    <section class="hero">
+        <div class="hero-left">
+            <div class="hero-eyebrow">◼ Finance · Accounting · Advisory</div>
+            <h1>The Professional<br>Ledger.</h1>
+            <p>Accuracy. Integrity. Results. A formal directory for financial experts, accountants, auditors, and advisors — structured with the precision the profession demands.</p>
+            <a href="#empty" class="hero-cta">Add new entry</a>
+        </div>
+        <div class="hero-right">
+            <div class="ledger-header">Account Summary</div>
+            <div class="ledger-row">
+                <span class="ledger-key">Profiles</span>
+                <span class="ledger-val val-zero">—</span>
+            </div>
+            <div class="ledger-row">
+                <span class="ledger-key">Firms</span>
+                <span class="ledger-val val-zero">—</span>
+            </div>
+            <div class="ledger-row">
+                <span class="ledger-key">Certifications</span>
+                <span class="ledger-val val-zero">—</span>
+            </div>
+            <div class="ledger-row">
+                <span class="ledger-key">Verified</span>
+                <span class="ledger-val val-green">100%</span>
+            </div>
+            <div class="ledger-row">
+                <span class="ledger-key">Status</span>
+                <span class="ledger-val val-navy">Open</span>
+            </div>
+        </div>
+    </section>
+
+    <div class="stats-strip">
+        <div class="stat">
+            <div class="stat-num">0</div>
+            <div class="stat-label">Profiles</div>
+        </div>
+        <div class="stat">
+            <div class="stat-num">—</div>
+            <div class="stat-label">Avg. Experience</div>
+        </div>
+        <div class="stat">
+            <div class="stat-num">FY26</div>
+            <div class="stat-label">Current Period</div>
+        </div>
+        <div class="stat">
+            <div class="stat-num">✓</div>
+            <div class="stat-label">Audit Ready</div>
+        </div>
+    </div>
+
+    <div class="expertise-section">
+        <div class="section-label">Specialisations accepted</div>
+        <div class="expertise-grid">
+            <div class="expertise-item">
+                <div class="expertise-title">Chartered Accounting</div>
+                <div class="expertise-sub">CA, CPA, ACCA</div>
+            </div>
+            <div class="expertise-item">
+                <div class="expertise-title">Financial Advisory</div>
+                <div class="expertise-sub">CFP, investment, wealth</div>
+            </div>
+            <div class="expertise-item">
+                <div class="expertise-title">Audit & Assurance</div>
+                <div class="expertise-sub">Internal, external, forensic</div>
+            </div>
+            <div class="expertise-item">
+                <div class="expertise-title">Tax & Compliance</div>
+                <div class="expertise-sub">GST, corporate, cross-border</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="empty" class="empty-section">
+        <div class="empty-label">// Current register</div>
+        <div class="empty-state">
+            <div class="empty-ledger-icon">£ 0.00</div>
+            <h2 class="empty-h2">No records found. Balances at zero.</h2>
+            <p class="empty-body">The register is currently empty. No professionals have submitted their credentials. Open the ledger and begin the first entry to establish the directory.</p>
+            <a href="#" class="empty-btn">Begin my entry</a>
+        </div>
+    </div>
+
+    <footer>
+        <strong>The Ledger</strong>
+        <span>OnlineResume · Finance &amp; Accounting Edition · All credentials verified</span>
+        <span><a href="layouts.html" style="color:inherit;text-decoration:none;">← Layouts</a></span>
+    </footer>
+
+</body>
+</html>

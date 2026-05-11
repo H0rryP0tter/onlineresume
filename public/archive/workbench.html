@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OnlineResume | The Workbench</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800;900&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --orange: #f39c12;
+            --orange-dark: #d48110;
+            --asphalt: #111111;
+            --steel: #1e2a35;
+            --steel-mid: #2c3e50;
+            --steel-light: #3d5166;
+            --cement: #888888;
+            --cement-light: #b0b0b0;
+            --offwhite: #f0ede8;
+            --bg: #e8e4df;
+        }
+
+        body {
+            font-family: 'Barlow', sans-serif;
+            background: var(--bg);
+            color: var(--asphalt);
+            margin: 0;
+        }
+
+        /* SAFETY STRIPE HEADER */
+        .safety-stripe {
+            height: 8px;
+            background: repeating-linear-gradient(
+                -45deg,
+                var(--orange) 0px,
+                var(--orange) 12px,
+                var(--asphalt) 12px,
+                var(--asphalt) 24px
+            );
+        }
+
+        /* NAV */
+        nav {
+            background: var(--asphalt);
+            padding: 0 48px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 60px;
+            border-bottom: 3px solid var(--orange);
+        }
+
+        .nav-logo {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-weight: 900;
+            font-size: 20px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--orange);
+        }
+
+        .back-link {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--cement-light);
+            text-decoration: none;
+        }
+
+        .back-link:hover { color: var(--orange); }
+
+        .nav-tag {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--steel-light);
+            border: 1px solid var(--steel-light);
+            padding: 4px 10px;
+        }
+
+        /* HERO */
+        .hero {
+            background: var(--steel);
+            padding: 80px 60px;
+            border-bottom: 6px solid var(--orange);
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-left {}
+
+        .hero-kicker {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--orange);
+            margin-bottom: 16px;
+        }
+
+        .hero h1 {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 5.5rem;
+            font-weight: 900;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            color: var(--offwhite);
+            line-height: 0.95;
+            margin-bottom: 24px;
+        }
+
+        .hero p {
+            font-size: 15px;
+            color: var(--cement-light);
+            font-weight: 300;
+            line-height: 1.7;
+            max-width: 500px;
+            margin-bottom: 36px;
+        }
+
+        .hero-cta {
+            display: inline-block;
+            background: var(--orange);
+            color: var(--asphalt);
+            padding: 16px 40px;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 16px;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            text-decoration: none;
+        }
+
+        .hero-cta:hover { background: var(--orange-dark); }
+
+        .hero-right {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            border-left: 4px solid var(--orange);
+            padding-left: 36px;
+        }
+
+        .hero-stat {
+            text-align: right;
+        }
+
+        .stat-num {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 900;
+            color: var(--orange);
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--cement);
+        }
+
+        .stat-divider {
+            height: 1px;
+            background: var(--steel-light);
+            margin: 16px 0;
+        }
+
+        /* TRADES GRID */
+        .trades-section {
+            padding: 48px;
+            background: var(--offwhite);
+            border-bottom: 4px solid var(--asphalt);
+        }
+
+        .trades-label {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--cement);
+            margin-bottom: 24px;
+        }
+
+        .trades-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
+        }
+
+        .trade-chip {
+            background: var(--asphalt);
+            color: var(--offwhite);
+            padding: 16px 20px;
+            border-left: 5px solid var(--orange);
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+
+        /* EMPTY STATE */
+        .empty-wrap {
+            padding: 48px;
+        }
+
+        .empty-state {
+            border: 4px dashed var(--orange);
+            background: var(--offwhite);
+            padding: 72px 60px;
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .empty-icon {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 3rem;
+            font-weight: 900;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            color: var(--cement-light);
+            margin-bottom: 8px;
+        }
+
+        .empty-h2 {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 2.4rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--asphalt);
+            margin-bottom: 12px;
+        }
+
+        .empty-body {
+            font-size: 15px;
+            font-weight: 300;
+            color: var(--cement);
+            line-height: 1.65;
+            max-width: 420px;
+            margin: 0 auto 36px;
+        }
+
+        .empty-btn {
+            display: inline-block;
+            background: var(--orange);
+            color: var(--asphalt);
+            padding: 18px 48px;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-weight: 900;
+            font-size: 17px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            text-decoration: none;
+        }
+
+        .empty-btn:hover { background: var(--orange-dark); }
+
+        /* FOOTER */
+        footer {
+            background: var(--asphalt);
+            border-top: 4px solid var(--orange);
+            padding: 18px 48px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        footer span {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--cement);
+        }
+
+        footer strong { color: var(--orange); }
+    </style>
+</head>
+<body>
+
+    <div class="safety-stripe"></div>
+
+    <nav>
+        <span class="nav-logo">Workbench</span>
+        <a href="layouts.html" class="back-link">← Back to layouts</a>
+        <span class="nav-tag">Trades Edition</span>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-left">
+            <div class="hero-kicker">▶ Trades · Skills · Graft</div>
+            <h1>Handy<br>&amp; Ready</h1>
+            <p>Built for the people who build the world. No fancy words. No nonsense. Just your skills, your trade, and your hard-won experience — laid out plain.</p>
+            <a href="#empty" class="hero-cta">Add your trade →</a>
+        </div>
+        <div class="hero-right">
+            <div class="hero-stat">
+                <div class="stat-num">100+</div>
+                <div class="stat-label">Trades listed</div>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="hero-stat">
+                <div class="stat-num">0</div>
+                <div class="stat-label">Profiles active</div>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="hero-stat">
+                <div class="stat-num">FREE</div>
+                <div class="stat-label">Always</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="trades-section">
+        <div class="trades-label">// Open trades</div>
+        <div class="trades-grid">
+            <div class="trade-chip">Electrician</div>
+            <div class="trade-chip">Carpenter</div>
+            <div class="trade-chip">Plumber</div>
+            <div class="trade-chip">Welder</div>
+            <div class="trade-chip">Mechanic</div>
+            <div class="trade-chip">Shopkeeper</div>
+            <div class="trade-chip">Mason</div>
+            <div class="trade-chip">Landscaper</div>
+            <div class="trade-chip">HVAC Tech</div>
+            <div class="trade-chip">Painter</div>
+        </div>
+    </div>
+
+    <div id="empty" class="empty-wrap">
+        <div class="empty-state">
+            <div class="empty-icon">[ EMPTY ]</div>
+            <h2 class="empty-h2">Toolbox Empty</h2>
+            <p class="empty-body">No tradespeople listed in your area yet. Don't wait for someone else — be the first to open shop and put your skills on the map.</p>
+            <a href="#" class="empty-btn">Open my shop</a>
+        </div>
+    </div>
+
+    <footer>
+        <strong>Workbench</strong>
+        <span>OnlineResume · Trades &amp; Manual Skills</span>
+        <span><a href="layouts.html" style="color:inherit;text-decoration:none;">← Layouts</a></span>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OnlineResume | The Launchpad</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,700;0,800;1,400&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --coral: #ff6b6b;
+            --coral-dark: #e8504f;
+            --peach: #ff9f7f;
+            --lavender: #7c6bff;
+            --mint: #00d2b4;
+            --bg: #fff5f5;
+            --surface: #ffffff;
+            --text: #1e1524;
+            --muted: #7a6570;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            margin: 0;
+        }
+
+        /* NAV */
+        nav {
+            padding: 16px 48px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--surface);
+            border-bottom: 1.5px solid #ffe0de;
+        }
+
+        .nav-logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 16px;
+            color: var(--coral);
+            letter-spacing: -0.02em;
+        }
+
+        .back-link {
+            font-size: 12px;
+            color: var(--muted);
+            text-decoration: none;
+        }
+
+        .back-link:hover { color: var(--coral); }
+
+        .nav-pill {
+            background: #fff0ef;
+            color: var(--coral);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            padding: 5px 12px;
+            border-radius: 100px;
+            text-transform: uppercase;
+        }
+
+        /* HERO */
+        .hero {
+            position: relative;
+            background: var(--coral);
+            padding: 100px 60px 100px;
+            text-align: center;
+            border-radius: 0 0 80px 80px;
+            overflow: hidden;
+        }
+
+        .hero-ring {
+            position: absolute;
+            border-radius: 50%;
+            border: 2px solid rgba(255,255,255,0.12);
+        }
+
+        .ring-1 { width: 400px; height: 400px; top: -160px; right: -100px; }
+        .ring-2 { width: 280px; height: 280px; bottom: -100px; left: -60px; }
+        .ring-3 { width: 200px; height: 200px; top: 40px; left: 40px; }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 6px 16px;
+            border-radius: 100px;
+            margin-bottom: 24px;
+            letter-spacing: 0.05em;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 5rem;
+            font-weight: 700;
+            color: white;
+            line-height: 1.0;
+            letter-spacing: -0.03em;
+            margin-bottom: 16px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.85);
+            max-width: 480px;
+            margin: 0 auto 40px;
+            line-height: 1.7;
+            font-weight: 400;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-cta {
+            display: inline-block;
+            background: white;
+            color: var(--coral-dark);
+            padding: 18px 48px;
+            border-radius: 100px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 15px;
+            text-decoration: none;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* STEPS */
+        .steps-wrap {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 72px 40px 0;
+        }
+
+        .steps-label {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 28px;
+            text-align: center;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .step-card {
+            background: var(--surface);
+            border-radius: 20px;
+            padding: 32px 28px;
+            border: 1.5px solid #ffe0de;
+            position: relative;
+        }
+
+        .step-num {
+            width: 36px;
+            height: 36px;
+            border-radius: 12px;
+            background: var(--bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--coral);
+            margin-bottom: 16px;
+        }
+
+        .step-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .step-desc {
+            font-size: 14px;
+            color: var(--muted);
+            line-height: 1.65;
+        }
+
+        /* EMPTY STATE */
+        .empty-wrap {
+            max-width: 900px;
+            margin: 48px auto 80px;
+            padding: 0 40px;
+        }
+
+        .empty-state {
+            background: var(--surface);
+            border-radius: 32px;
+            padding: 72px 60px;
+            text-align: center;
+            border: 2px dashed #ffd0cc;
+            position: relative;
+        }
+
+        .countdown-rings {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 32px;
+        }
+
+        .ring-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .rd-1 { background: var(--coral); }
+        .rd-2 { background: var(--peach); }
+        .rd-3 { background: var(--lavender); }
+        .rd-4 { background: var(--mint); }
+
+        .empty-h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 14px;
+        }
+
+        .empty-body {
+            font-size: 15px;
+            color: var(--muted);
+            line-height: 1.7;
+            max-width: 420px;
+            margin: 0 auto 36px;
+        }
+
+        .empty-btn {
+            display: inline-block;
+            background: var(--lavender);
+            color: white;
+            padding: 18px 52px;
+            border-radius: 100px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 15px;
+            text-decoration: none;
+        }
+
+        .empty-btn:hover { background: #6355ee; }
+
+        /* FOOTER */
+        footer {
+            background: var(--text);
+            padding: 20px 48px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 20px 20px 0 0;
+        }
+
+        footer span { font-size: 12px; color: rgba(255,255,255,0.4); }
+        footer .footer-brand { font-family: 'Space Grotesk', sans-serif; font-weight: 700; color: var(--coral); font-size: 14px; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <span class="nav-logo">Launchpad</span>
+        <a href="layouts.html" class="back-link">← Back to layouts</a>
+        <span class="nav-pill">For first-timers</span>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-ring ring-1"></div>
+        <div class="hero-ring ring-2"></div>
+        <div class="hero-ring ring-3"></div>
+        <div class="hero-badge">🚀 No experience required</div>
+        <h1>Your First<br>Step.</h1>
+        <p>No experience? No problem. We help you spotlight your potential, your attitude, and what makes you you.</p>
+        <a href="#empty" class="hero-cta">Start my journey →</a>
+    </section>
+
+    <div class="steps-wrap">
+        <div class="steps-label">How it works</div>
+        <div class="steps-grid">
+            <div class="step-card">
+                <div class="step-num">01</div>
+                <div class="step-title">Tell us about you</div>
+                <p class="step-desc">Any skills, hobbies, or life experience counts. We help you frame it professionally.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-num">02</div>
+                <div class="step-title">Build your profile</div>
+                <p class="step-desc">Pick a layout that feels right. Fill in the blanks. Done in under 10 minutes.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-num">03</div>
+                <div class="step-title">Share & apply</div>
+                <p class="step-desc">Send a link to employers. No PDF to update, no attachments to forget.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="empty" class="empty-wrap">
+        <div class="empty-state">
+            <div class="countdown-rings">
+                <div class="ring-dot rd-1"></div>
+                <div class="ring-dot rd-2"></div>
+                <div class="ring-dot rd-3"></div>
+                <div class="ring-dot rd-4"></div>
+            </div>
+            <h2 class="empty-h2">Ready for Blastoff?</h2>
+            <p class="empty-body">No students have launched their profiles yet. Be the first to start the countdown — the whole runway is yours.</p>
+            <a href="#" class="empty-btn">Start my journey</a>
+        </div>
+    </div>
+
+    <footer>
+        <span class="footer-brand">Launchpad</span>
+        <span>OnlineResume · Student & First-timer Edition</span>
+        <span><a href="layouts.html" style="color:inherit;text-decoration:none;">← Layouts</a></span>
+    </footer>
+
+</body>
+</html>

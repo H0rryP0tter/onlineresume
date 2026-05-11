@@ -1,0 +1,27 @@
+.env
+node_modules/
+.claude/
+
+# Logs
+server.err.log
+server.out.log
+
+# Archive / dev-only folders
+archiveClaudePlans/
+archiveStudyModules/
+Claude Design/
+
+# Dev documentation & internal files
+jwt-flow.html
+mongooseSchema.js
+databaseSchema.json
+Express_Project_Roadmap.md
+AGENTS.md
+CLAUDE.md
+GEMINI.md
+DEPLOYMENT.md
+public/all-html-except-index.md
+*.pdf
+
+# Database dumps
+data/

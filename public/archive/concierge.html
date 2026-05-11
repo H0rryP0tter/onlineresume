@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OnlineResume | The Concierge</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --navy: #162043;
+            --navy-mid: #1f2f5e;
+            --navy-light: #2d3f7a;
+            --gold: #c8a96e;
+            --gold-light: #e8cf9a;
+            --gold-pale: #f5edd8;
+            --ivory: #fdfaf4;
+            --warm-white: #f8f4ec;
+            --text: #262626;
+            --muted: #6b6256;
+        }
+
+        body {
+            font-family: 'Raleway', sans-serif;
+            background: var(--ivory);
+            color: var(--text);
+            margin: 0;
+        }
+
+        /* GOLD RULE TOP */
+        .gold-rule { height: 3px; background: linear-gradient(90deg, var(--navy), var(--gold), var(--navy)); }
+
+        /* HEADER */
+        .site-header {
+            background: var(--navy);
+            padding: 0 60px;
+        }
+
+        .header-top {
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(200,169,110,0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back-link {
+            font-size: 11px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: rgba(200,169,110,0.6);
+            text-decoration: none;
+            font-family: 'Raleway', sans-serif;
+            font-weight: 500;
+        }
+
+        .back-link:hover { color: var(--gold); }
+
+        .header-tagline {
+            font-size: 10px;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: rgba(200,169,110,0.45);
+        }
+
+        .hotel-name {
+            text-align: center;
+            padding: 48px 0 40px;
+        }
+
+        .hotel-crest {
+            font-size: 1.2rem;
+            color: var(--gold);
+            letter-spacing: 0.6em;
+            margin-bottom: 16px;
+            opacity: 0.7;
+        }
+
+        .hotel-name h1 {
+            font-family: 'Libre Baskerville', Georgia, serif;
+            font-size: 3.2rem;
+            font-weight: 400;
+            font-style: italic;
+            color: var(--gold-light);
+            letter-spacing: 0.04em;
+            margin-bottom: 10px;
+        }
+
+        .hotel-rule {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            justify-content: center;
+        }
+
+        .hotel-rule-line {
+            width: 80px;
+            height: 1px;
+            background: rgba(200,169,110,0.3);
+        }
+
+        .hotel-rule-diamond {
+            color: var(--gold);
+            font-size: 10px;
+            opacity: 0.6;
+        }
+
+        .hotel-subtitle {
+            font-size: 10px;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: rgba(200,169,110,0.5);
+            margin-top: 10px;
+        }
+
+        /* NAV LINKS */
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 0;
+            border-top: 1px solid rgba(200,169,110,0.15);
+        }
+
+        .nav-link {
+            padding: 12px 28px;
+            font-size: 10px;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: rgba(200,169,110,0.5);
+            text-decoration: none;
+            border-right: 1px solid rgba(200,169,110,0.1);
+            font-weight: 600;
+        }
+
+        .nav-link:last-child { border-right: none; }
+        .nav-link:hover { color: var(--gold); }
+
+        /* HERO */
+        .hero {
+            background: var(--warm-white);
+            padding: 80px 80px;
+            display: grid;
+            grid-template-columns: 1fr 1px 1fr;
+            gap: 0;
+            border-bottom: 1px solid #e2d9c8;
+        }
+
+        .hero-divider { background: #e2d9c8; margin: 0 60px; }
+
+        .hero-left {
+            padding-right: 40px;
+        }
+
+        .hero-label {
+            font-size: 10px;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .hero-headline {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 2.8rem;
+            font-weight: 400;
+            font-style: italic;
+            color: var(--navy);
+            line-height: 1.25;
+            margin-bottom: 20px;
+        }
+
+        .hero-body {
+            font-size: 14px;
+            font-weight: 300;
+            color: var(--muted);
+            line-height: 1.85;
+            margin-bottom: 36px;
+        }
+
+        .hero-btn {
+            display: inline-block;
+            border: 1.5px solid var(--gold);
+            color: var(--navy);
+            padding: 14px 36px;
+            font-size: 11px;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            text-decoration: none;
+            font-weight: 600;
+            background: transparent;
+        }
+
+        .hero-btn:hover { background: var(--navy); color: var(--gold); }
+
+        .hero-right { padding-left: 40px; }
+
+        .amenity-list { list-style: none; display: flex; flex-direction: column; gap: 20px; }
+
+        .amenity-item {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e2d9c8;
+        }
+
+        .amenity-item:last-child { border-bottom: none; padding-bottom: 0; }
+
+        .amenity-num {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 1.2rem;
+            font-style: italic;
+            color: var(--gold);
+            min-width: 24px;
+            font-weight: 400;
+        }
+
+        .amenity-text {}
+        .amenity-title { font-size: 13px; font-weight: 600; color: var(--navy); margin-bottom: 4px; letter-spacing: 0.04em; }
+        .amenity-desc { font-size: 12px; font-weight: 300; color: var(--muted); line-height: 1.65; }
+
+        /* PROFILE TYPES */
+        .suites-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            border-top: 1px solid #e2d9c8;
+            border-bottom: 1px solid #e2d9c8;
+            background: var(--ivory);
+        }
+
+        .suite {
+            padding: 32px 28px;
+            border-right: 1px solid #e2d9c8;
+            text-align: center;
+        }
+
+        .suite:last-child { border-right: none; }
+
+        .suite-icon {
+            font-size: 22px;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .suite-title {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 14px;
+            font-style: italic;
+            color: var(--navy);
+            margin-bottom: 6px;
+        }
+
+        .suite-desc { font-size: 12px; color: var(--muted); font-weight: 300; }
+
+        /* EMPTY STATE */
+        .guestbook-section {
+            padding: 72px 80px;
+            background: var(--warm-white);
+        }
+
+        .guestbook-label {
+            text-align: center;
+            font-size: 10px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 40px;
+            font-weight: 600;
+        }
+
+        .guestbook-empty {
+            max-width: 560px;
+            margin: 0 auto;
+            border: 1px solid #d9cdb5;
+            padding: 64px;
+            text-align: center;
+            background: var(--ivory);
+            position: relative;
+        }
+
+        .guestbook-empty::before {
+            content: '';
+            position: absolute;
+            top: 5px; left: 5px; right: 5px; bottom: 5px;
+            border: 1px solid #e8dfcd;
+            pointer-events: none;
+        }
+
+        .empty-crest {
+            color: var(--gold-light);
+            font-size: 1.6rem;
+            letter-spacing: 0.4em;
+            margin-bottom: 24px;
+            opacity: 0.5;
+        }
+
+        .empty-heading {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 1.5rem;
+            font-weight: 400;
+            font-style: italic;
+            color: var(--navy);
+            margin-bottom: 14px;
+        }
+
+        .empty-body {
+            font-size: 13.5px;
+            font-weight: 300;
+            color: var(--muted);
+            line-height: 1.85;
+            max-width: 380px;
+            margin: 0 auto 36px;
+        }
+
+        .check-in-btn {
+            display: inline-block;
+            background: var(--navy);
+            color: var(--gold-light);
+            padding: 14px 40px;
+            font-size: 11px;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .check-in-btn:hover { background: var(--navy-mid); }
+
+        /* FOOTER */
+        footer {
+            background: var(--navy);
+            border-top: 3px solid var(--gold);
+            padding: 24px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-name {
+            font-family: 'Libre Baskerville', serif;
+            font-style: italic;
+            color: var(--gold);
+            font-size: 15px;
+        }
+
+        footer span {
+            font-size: 10px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: rgba(200,169,110,0.4);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="gold-rule"></div>
+
+    <header class="site-header">
+        <div class="header-top">
+            <a href="layouts.html" class="back-link">← Back to layouts</a>
+            <div class="hotel-crest">✦ ✦ ✦ ✦ ✦</div>
+            <span class="header-tagline">Hospitality · Guest Care · Excellence</span>
+        </div>
+        <div class="hotel-name">
+            <h1>The Concierge</h1>
+            <div class="hotel-rule">
+                <div class="hotel-rule-line"></div>
+                <div class="hotel-rule-diamond">◆</div>
+                <div class="hotel-rule-line"></div>
+            </div>
+            <div class="hotel-subtitle">Professional Profiles for the Art of Service</div>
+        </div>
+        <nav class="nav-links">
+            <a href="#" class="nav-link">Chef Profiles</a>
+            <a href="#" class="nav-link">Hotel Staff</a>
+            <a href="#" class="nav-link">Tour Guides</a>
+            <a href="#" class="nav-link">Event Staff</a>
+            <a href="#" class="nav-link">Sommeliers</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-left">
+            <div class="hero-label">◆ Welcome</div>
+            <h2 class="hero-headline">At Your<br>Service.</h2>
+            <p class="hero-body">Presenting the finest professionals in hospitality and guest care. Each profile is a testament to the craft of service — verified, detailed, and presented with the discretion the industry demands.</p>
+            <a href="#guestbook" class="hero-btn">Check In Now</a>
+        </div>
+        <div class="hero-divider"></div>
+        <div class="hero-right">
+            <ul class="amenity-list">
+                <li class="amenity-item">
+                    <span class="amenity-num">I</span>
+                    <div class="amenity-text">
+                        <div class="amenity-title">Verified Credentials</div>
+                        <div class="amenity-desc">All certifications and experience confirmed. No unverified claims appear in the directory.</div>
+                    </div>
+                </li>
+                <li class="amenity-item">
+                    <span class="amenity-num">II</span>
+                    <div class="amenity-text">
+                        <div class="amenity-title">Discreet Presentation</div>
+                        <div class="amenity-desc">Profiles presented with the refinement the hospitality sector expects of its professionals.</div>
+                    </div>
+                </li>
+                <li class="amenity-item">
+                    <span class="amenity-num">III</span>
+                    <div class="amenity-text">
+                        <div class="amenity-title">Available Worldwide</div>
+                        <div class="amenity-desc">International candidates and multilingual profiles welcome and celebrated.</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <div class="suites-row">
+        <div class="suite">
+            <span class="suite-icon">🍽</span>
+            <div class="suite-title">Chef Profiles</div>
+            <div class="suite-desc">Kitchen to table, Michelin to catering</div>
+        </div>
+        <div class="suite">
+            <span class="suite-icon">🏨</span>
+            <div class="suite-title">Hotel Staff</div>
+            <div class="suite-desc">Front desk, concierge, management</div>
+        </div>
+        <div class="suite">
+            <span class="suite-icon">🗺</span>
+            <div class="suite-title">Tour Guides</div>
+            <div class="suite-desc">Destination specialists, multilingual</div>
+        </div>
+        <div class="suite">
+            <span class="suite-icon">🥂</span>
+            <div class="suite-title">Event Staff</div>
+            <div class="suite-desc">Banquets, galas, private functions</div>
+        </div>
+    </div>
+
+    <div id="guestbook" class="guestbook-section">
+        <div class="guestbook-label">◆ The Guestbook ◆</div>
+        <div class="guestbook-empty">
+            <div class="empty-crest">✦ ✦ ✦</div>
+            <h3 class="empty-heading">The guestbook awaits.</h3>
+            <p class="empty-body">No profiles have been submitted to the directory. We await the first arrival with the patience the profession demands. Your chapter begins with a single entry.</p>
+            <a href="#" class="check-in-btn">Register Your Profile</a>
+        </div>
+    </div>
+
+    <footer>
+        <span class="footer-name">The Concierge</span>
+        <span>OnlineResume · Hospitality Edition</span>
+        <span><a href="layouts.html" style="color:inherit;text-decoration:none;">← Layouts</a></span>
+    </footer>
+
+</body>
+</html>
