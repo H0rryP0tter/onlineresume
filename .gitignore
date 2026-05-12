@@ -10,6 +10,8 @@ server.out.log
 archiveClaudePlans/
 archiveStudyModules/
 Claude Design/
+mongodb-database-tools/
+mongodump-export/
 
 # Dev documentation & internal files
 jwt-flow.html
