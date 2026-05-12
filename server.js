@@ -1,6 +1,8 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import { fileURLToPath } from 'url';
+import path from 'path';
 import helmet from 'helmet';
 import cookieParser from 'cookie-parser';
 import authRoutes from './routes/authRoutes.js';
@@ -10,8 +12,9 @@ import countryRoutes from './routes/countryRoutes.js';
 import timeZoneRoutes from './routes/timeZoneRoutes.js';
 import { pageGuard, redirectIfAuthed } from './middleware/auth.js';
 
-dotenv.config(); 
+dotenv.config();
 
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();  
 const MONGO_URI = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/resumeDB';
 const PORT = process.env.PORT || 3000;
@@ -38,10 +41,10 @@ app.use(cookieParser());
 app.use(requestLogger);
 
 app.get('/resume-builder.html', pageGuard, (req, res) => {
-    res.sendFile('resume-builder.html', { root: 'public' });
+    res.sendFile('resume-builder.html', { root: path.join(__dirname, 'public') });
 });
 
-app.use(express.static('public', { index: false }));
+app.use(express.static(path.join(__dirname, 'public'), { index: false }));
 
 app.use('/admin-panel', adminRoutes);  
 app.use('/auth', authRoutes);
@@ -50,7 +53,7 @@ app.use('/timezones', timeZoneRoutes);
 app.use('/resume', resumeRoutes);
 
 app.get('/', redirectIfAuthed, (req, res) => {
-    res.sendFile('home.html', { root: 'public' });
+    res.sendFile('home.html', { root: path.join(__dirname, 'public') });
 });
 
 app.get('/status', (req, res) => { 
