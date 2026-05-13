@@ -83,5 +83,6 @@ export const logout = (req, res) => {
 };
 
 export const me = (req, res) => {
+    res.set('Cache-Control', 'no-store');
     res.json({ user: req.user ?? null });
 };
