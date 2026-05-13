@@ -15,7 +15,8 @@ import { pageGuard, redirectIfAuthed } from './middleware/auth.js';
 dotenv.config();
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const app = express();  
+const app = express();
+app.set('trust proxy', 1);
 const MONGO_URI = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/resumeDB';
 const PORT = process.env.PORT || 3000;
 
