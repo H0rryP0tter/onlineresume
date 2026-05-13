@@ -1,4 +1,5 @@
 import jwt from 'jsonwebtoken';
+import { User } from '../models/user.js';
 
 const COOKIE_NAME = 'authToken';
 
@@ -57,10 +58,18 @@ export const requireAuth = (req, res, next) => {
 
 // Like requireAuth but never returns 401 — sets req.user if valid, otherwise leaves it null.
 // Used by session-check endpoints so browsers don't log a red network error for logged-out users.
-export const softAuth = (req, res, next) => {
+// Also verifies the user still exists in the DB — clears the cookie if not.
+export const softAuth = async (req, res, next) => {
     const token = req.cookies?.[COOKIE_NAME];
     if (token && process.env.JWT_SECRET) {
-        try { req.user = jwt.verify(token, process.env.JWT_SECRET); } catch {}
+        try {
+            req.user = jwt.verify(token, process.env.JWT_SECRET);
+            const exists = await User.exists({ _id: req.user.id });
+            if (!exists) {
+                req.user = null;
+                res.clearCookie(COOKIE_NAME, { httpOnly: true, sameSite: 'lax', secure: process.env.NODE_ENV === 'production', path: '/' });
+            }
+        } catch {}
     }
     next();
 };
