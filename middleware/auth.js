@@ -67,7 +67,7 @@ export const softAuth = async (req, res, next) => {
             const exists = await User.exists({ _id: req.user.id });
             if (!exists) {
                 req.user = null;
-                res.clearCookie(COOKIE_NAME, { httpOnly: true, sameSite: 'lax', secure: process.env.NODE_ENV === 'production', path: '/' });
+                res.clearCookie(COOKIE_NAME, { httpOnly: true, sameSite: 'lax', secure: process.env.NODE_ENV === 'production', domain: process.env.NODE_ENV === 'production' ? '.2roundglass.com' : undefined, path: '/' });
             }
         } catch {}
     }

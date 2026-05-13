@@ -9,6 +9,7 @@ const cookieOptions = {
     httpOnly: true,
     sameSite: 'lax',
     secure: process.env.NODE_ENV === 'production',
+    domain: process.env.NODE_ENV === 'production' ? '.2roundglass.com' : undefined,
     path: '/',
     maxAge: TOKEN_MAX_AGE_MS
 };
@@ -75,6 +76,7 @@ export const logout = (req, res) => {
         httpOnly: true,
         sameSite: 'lax',
         secure: process.env.NODE_ENV === 'production',
+        domain: process.env.NODE_ENV === 'production' ? '.2roundglass.com' : undefined,
         path: '/'
     });
     res.json({ message: 'Logout successful' });
