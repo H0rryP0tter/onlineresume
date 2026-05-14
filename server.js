@@ -47,11 +47,13 @@ app.get('/resume-builder.html', pageGuard, (req, res) => {
 
 app.use(express.static(path.join(__dirname, 'public'), { index: false }));
 
-app.use('/admin-panel', adminRoutes);  
-app.use('/auth', authRoutes);
+const noCache = (req, res, next) => { res.set('Cache-Control', 'no-store'); next(); };
+
+app.use('/admin-panel', noCache, adminRoutes);
+app.use('/auth', noCache, authRoutes);
 app.use('/countries', countryRoutes);
 app.use('/timezones', timeZoneRoutes);
-app.use('/resume', resumeRoutes);
+app.use('/resume', noCache, resumeRoutes);
 
 app.get('/', redirectIfAuthed, (req, res) => {
     res.sendFile('home.html', { root: path.join(__dirname, 'public') });
