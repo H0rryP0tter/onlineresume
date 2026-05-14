@@ -185,7 +185,7 @@ function checkSession() {
    Resume panel helpers (from app.js logic)
 ──────────────────────────────────────────── */
 function loadResumes() {
-  fetch('/resume/all?_=' + Date.now())
+  fetch('/resume/all')
     .then(readJsonResponse)
     .then(data => renderResume(data.results))
     .catch(error => {
