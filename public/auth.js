@@ -29,6 +29,7 @@ const authMsg     = document.getElementById('auth-message');
 const heading     = document.getElementById('auth-heading');
 const subhead     = document.getElementById('auth-subhead');
 const navBack     = document.getElementById('nav-back');
+const navBrand    = document.getElementById('nav-brand');
 
 function validateEmail(e) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e); }
 function validatePassword(p) { return p.length >= 8; }
@@ -103,6 +104,7 @@ function showLoggedOut(message) {
   sessionBar.hidden = true;
   appShell.hidden = true;
   navBack.hidden = false;
+  navBrand.href = '/home.html';
   currentUser.textContent = '';
   clearBanners();
   if (message) { authMsg.textContent = message; }
@@ -113,6 +115,7 @@ function showLoggedIn(user) {
   sessionBar.hidden = false;
   appShell.hidden = false;
   navBack.hidden = true;
+  navBrand.href = '#';
   currentUser.textContent = 'Signed in as ' + user.email;
   clearBanners();
   loadResumes();
