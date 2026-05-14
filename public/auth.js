@@ -344,3 +344,7 @@ function deleteResume(id) {
 }
 
 checkSession();
+
+window.addEventListener('pageshow', (e) => {
+    if (e.persisted && appShell.hidden) window.location.replace('/');
+});
