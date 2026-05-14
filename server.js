@@ -47,7 +47,13 @@ app.get('/resume-builder.html', pageGuard, (req, res) => {
 
 app.use(express.static(path.join(__dirname, 'public'), { index: false }));
 
-const noCache = (req, res, next) => { res.set('Cache-Control', 'no-store'); next(); };
+const noCache = (req, res, next) => {
+    res.set('Cache-Control', 'no-store');
+    res.set('Pragma', 'no-cache');
+    res.set('Expires', '0');
+    res.set('X-Accel-Buffering', 'no');
+    next();
+};
 
 app.use('/admin-panel', noCache, adminRoutes);
 app.use('/auth', noCache, authRoutes);
