@@ -4,6 +4,24 @@ window.addEventListener('scroll', () => {
   nav.classList.toggle('scrolled', window.scrollY > 8);
 }, { passive: true });
 
+/* ── Hamburger menu ── */
+const hamBtn = document.getElementById('ham-btn');
+const navDrawer = document.getElementById('nav-drawer');
+hamBtn.addEventListener('click', () => {
+  const open = navDrawer.classList.toggle('open');
+  hamBtn.classList.toggle('open', open);
+  hamBtn.setAttribute('aria-expanded', open);
+  navDrawer.setAttribute('aria-hidden', !open);
+});
+function closeDrawer() {
+  navDrawer.classList.remove('open');
+  hamBtn.classList.remove('open');
+  hamBtn.setAttribute('aria-expanded', 'false');
+  navDrawer.setAttribute('aria-hidden', 'true');
+}
+window.closeDrawer = closeDrawer;
+window.addEventListener('resize', () => { if (window.innerWidth > 640) closeDrawer(); });
+
 /* ── Rotating hero word ── */
 const professions = ['the electrician','the surgeon','the chef','the architect','the analyst','the teacher','the plumber','the designer','the welder','the engineer'];
 let rotIdx = 0;

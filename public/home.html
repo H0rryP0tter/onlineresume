@@ -52,6 +52,33 @@ a { color: inherit; text-decoration: none; }
 button { font-family: inherit; cursor: pointer; }
 
 @media (max-width: 760px) { .hide-sm { display: none !important; } }
+@media (max-width: 480px) {
+  #site-nav { padding: 0 14px; }
+  .nav-brand { font-size: 18px; }
+  .nav-cta { padding: 7px 12px; font-size: 11px; }
+  #hero { padding: 100px 16px 60px; }
+  .hero-h1 { font-size: clamp(32px, 9vw, 44px); }
+  .hero-sub { font-size: 15px; }
+  .hero-stats { gap: 16px; }
+  .stat-n { font-size: 20px; }
+  #modes { padding: 60px 16px; }
+  .modes-header { margin-bottom: 28px; }
+  .modes-grid { gap: 16px; }
+  .mode-pane { padding: 24px 20px; min-height: 320px; }
+  .mode-pane h3 { font-size: 24px; }
+  #how { padding: 60px 16px; }
+  #faq { padding: 60px 16px; }
+  .faq-q { font-size: 14px; padding: 16px 4px; }
+  #cta { padding: 70px 16px; }
+  #footer { padding: 32px 16px 20px; }
+}
+@media (max-width: 400px) {
+  .footer-grid { grid-template-columns: 1fr !important; }
+  .hero-ctas { flex-direction: column; }
+  .hero-ctas a { text-align: center; }
+  .cta-btns { flex-direction: column; align-items: stretch; }
+  .cta-btns a { text-align: center; }
+}
 
 /* ── NAV ── */
 #site-nav {
@@ -499,8 +526,23 @@ button { font-family: inherit; cursor: pointer; }
   <div class="nav-actions">
     <a href="/auth.html" class="nav-signin hide-sm">Sign in</a>
     <a href="/resume-builder.html" class="nav-cta">Start free</a>
+    <button type="button" class="ham-btn" id="ham-btn" aria-label="Open menu" aria-expanded="false">
+      <span class="ham-bar"></span>
+      <span class="ham-bar"></span>
+      <span class="ham-bar"></span>
+    </button>
   </div>
 </nav>
+
+<!-- Mobile nav drawer -->
+<div class="nav-drawer" id="nav-drawer" aria-hidden="true">
+  <a href="#modes" onclick="closeDrawer()">Modes</a>
+  <a href="#gallery" onclick="closeDrawer()">Gallery</a>
+  <a href="#how" onclick="closeDrawer()">How it works</a>
+  <a href="#faq" onclick="closeDrawer()">FAQ</a>
+  <a href="/auth.html">Sign in</a>
+  <a href="/resume-builder.html" class="nav-cta nav-drawer-cta">Start free</a>
+</div>
 
 <!-- ── HERO ── -->
 <section id="hero">

@@ -623,6 +623,89 @@ select.finput{
 }
 #toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 .btn-clear{margin-left:auto;color:var(--ink4);font-size:12px;}
+
+/* ═══════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════ */
+@media (max-width: 700px) {
+  /* Topbar: stack brand + controls tightly */
+  #topbar { padding: 0 12px; gap: 8px; }
+  .brand { font-size: 16px; }
+  .save-btn { padding: 7px 11px; font-size: 11px; }
+  .pct-chip { width: 30px; height: 30px; font-size: 10px; }
+
+  /* Mode tabs: shrink text, hide emoji label on smallest screens */
+  .mode-tabs { gap: 2px; padding: 2px; }
+  .mtab { padding: 5px 8px; font-size: 11px; gap: 3px; }
+}
+
+@media (max-width: 480px) {
+  /* Mode tab icons only on very small screens */
+  .mtab .mi { font-size: 15px; }
+  .mtab { padding: 5px 6px; }
+  .mtab span:not(.mi) { display: none; }
+}
+
+@media (max-width: 700px) {
+  /* Wizard: collapse 2/3-column field grids */
+  .fg.c2, .fg.c3 { grid-template-columns: 1fr; }
+  .wiz-layout { padding: 24px 16px 80px; }
+  .wiz-title { font-size: 22px; }
+
+  /* Wizard step strip: hide labels, show numbers only */
+  .wstep-label { display: none; }
+  .wiz-strip { gap: 4px; }
+
+  /* Dashboard: collapse sidebar into top bar */
+  .dash-layout { grid-template-columns: 1fr; }
+  .dash-sidebar {
+    position: static;
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    padding: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+  }
+  .avatar { width: 44px; height: 44px; font-size: 16px; margin: 0; flex-shrink: 0; }
+  .dash-name { font-size: 13px; margin: 0; }
+  .dash-sub { font-size: 11px; margin: 0; }
+  .comp-block { display: none; }
+  .dash-nav-label { display: none; }
+  .dash-nav {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 4px;
+    width: 100%;
+    margin: 0;
+  }
+  .dnav-item { font-size: 12px; padding: 6px 8px; }
+  .dnav-pct { display: none; }
+  .dash-main { padding: 20px 16px 60px; }
+  .dash-sec-title { font-size: 20px; }
+
+  /* Field cards: 2-column then 1 */
+  .field-cards { grid-template-columns: repeat(2, 1fr); }
+
+  /* Chat mode */
+  .chat-layout { padding: 16px 12px 56px; }
+  .cbubble { max-width: 92%; font-size: 13px; }
+
+  /* Focus mode */
+  .focus-q { font-size: 22px; }
+  .focus-stage { padding: 16px 16px 24px; }
+  .focus-input-area .finput { font-size: 15px; }
+
+  /* Phone input: stack vertically */
+  .phone-input { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 380px) {
+  /* Narrowest: field cards single column */
+  .field-cards { grid-template-columns: 1fr; }
+}
 </style>
 </head>
 <body>

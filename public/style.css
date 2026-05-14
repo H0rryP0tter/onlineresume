@@ -356,6 +356,28 @@ header h1 {
   color: white;
 }
 
+/* ===== RESPONSIVE ===== */
+@media (max-width: 600px) {
+  body { padding: 12px; }
+
+  .rp-header { padding: 20px 16px; gap: 14px; }
+  .rp-avatar { width: 48px; height: 48px; font-size: 16px; flex-shrink: 0; }
+  .rp-name { font-size: 18px; }
+  .rp-job-title { font-size: 12px; }
+
+  .rp-body { padding: 16px; }
+  .rp-meta { gap: 8px 12px; }
+
+  .rp-actions {
+    padding: 14px 16px;
+    gap: 8px;
+  }
+  .btn-rp-danger { margin-left: 0; width: 100%; }
+
+  #session-bar { flex-wrap: wrap; }
+  #resume-panel { margin: 20px auto 40px; }
+}
+
 /* ===== PRINT ===== */
 @media print {
   header, #auth-section, .rp-actions, .rp-updated { display: none !important; }

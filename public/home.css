@@ -522,35 +522,103 @@ footer a:hover {
   50%       { opacity: 0.8; }
 }
 
+/* ===== HAMBURGER MENU ===== */
+.ham-btn {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 8px;
+  transition: background .15s;
+}
+.ham-btn:hover { background: var(--paper2); }
+.ham-bar {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--ink);
+  border-radius: 2px;
+  transition: transform .25s, opacity .2s;
+}
+.ham-btn.open .ham-bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.ham-btn.open .ham-bar:nth-child(2) { opacity: 0; }
+.ham-btn.open .ham-bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.nav-drawer {
+  display: none;
+  position: fixed;
+  top: 56px;
+  left: 0;
+  right: 0;
+  background: var(--paper);
+  border-bottom: 1px solid var(--border);
+  padding: 16px 20px 20px;
+  z-index: 999;
+  flex-direction: column;
+  gap: 4px;
+  box-shadow: var(--shadow-md);
+}
+.nav-drawer.open { display: flex; }
+.nav-drawer a {
+  display: block;
+  padding: 12px 10px;
+  color: var(--ink);
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 500;
+  border-radius: 8px;
+  transition: background .15s;
+}
+.nav-drawer a:hover { background: var(--paper2); }
+.nav-drawer-cta { margin-top: 8px; text-align: center; display: block !important; }
+
 /* ===== RESPONSIVE ===== */
 @media (max-width: 640px) {
+  nav { padding: 0 1rem; }
+
+  .ham-btn { display: flex; }
+  .nav-links { display: none; }
+
+  .hero { padding: 6rem 1rem 4rem; }
+
   .hero-cta {
     flex-direction: column;
     align-items: stretch;
     width: 100%;
-    max-width: 300px;
+    max-width: 100%;
   }
 
   .btn-primary,
   .btn-secondary {
     text-align: center;
-  }
-
-  .gallery-grid {
-    grid-template-columns: repeat(auto-fill, minmax(155px, 1fr));
-  }
-
-  .steps-grid {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .step-card {
-    max-width: 100%;
     width: 100%;
   }
 
-  .nav-links {
-    display: none;
+  .gallery-section { padding: 3rem 1rem; }
+  .gallery-grid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 1rem;
   }
+
+  .features-section { padding: 3rem 1rem; }
+  .steps-grid {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .step-card {
+    max-width: 100%;
+    width: 100%;
+    padding: 1.8rem 1.2rem;
+  }
+
+  .invitation-section { padding: 4rem 1rem; }
+
+  footer { padding: 1.5rem 1rem; }
 }
