@@ -28,6 +28,7 @@ const authMsg     = document.getElementById('auth-message');
 
 const heading     = document.getElementById('auth-heading');
 const subhead     = document.getElementById('auth-subhead');
+const navBack     = document.getElementById('nav-back');
 
 function validateEmail(e) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e); }
 function validatePassword(p) { return p.length >= 8; }
@@ -101,6 +102,7 @@ function showLoggedOut(message) {
   authForms.hidden = false;
   sessionBar.hidden = true;
   appShell.hidden = true;
+  navBack.hidden = false;
   currentUser.textContent = '';
   clearBanners();
   if (message) { authMsg.textContent = message; }
@@ -110,6 +112,7 @@ function showLoggedIn(user) {
   authForms.hidden = true;
   sessionBar.hidden = false;
   appShell.hidden = false;
+  navBack.hidden = true;
   currentUser.textContent = 'Signed in as ' + user.email;
   clearBanners();
   loadResumes();
