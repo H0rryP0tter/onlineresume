@@ -1,264 +1,349 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Sign in or create a free ResumeCraft account to build your professional resume.">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📄</text></svg>">
-  <title>ResumeCraft — Sign In</title>
-  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+  <meta name="description" content="Sign in or create a free CvAdda account to build your professional resume.">
+  <link rel="icon" href="/spartan/assets/favicon.svg" type="image/svg+xml">
+  <title>CvAdda — Sign In</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
   <style>
+  /* ── TOKENS ── */
   :root {
-    --ink:        #1a1814;
-    --ink2:       #3d3a35;
-    --ink3:       #7a7570;
-    --ink4:       #b0aca5;
-    --paper:      #faf8f4;
-    --paper2:     #f2efe8;
-    --paper3:     #e6e1d6;
-    --white:      #ffffff;
-    --accent:     #922b21;
-    --accent-h:   #6d1f18;
-    --accent-bg:  #f8e8e4;
-    --border:     rgba(26,24,20,0.11);
-    --border2:    rgba(26,24,20,0.18);
-    --error:      #c0392b;
-    --success:    #1a7a6e;
-    --shadow-sm:  0 1px 3px rgba(26,24,20,0.08);
-    --shadow-md:  0 4px 16px rgba(26,24,20,0.10);
-    --r:          10px;
-    --r-lg:       16px;
+    --bone-50:  #fbfaf7;
+    --bone-100: #f4f1ea;
+    --bone-200: #e8e3d8;
+    --bone-300: #d6d0c2;
+    --bone-400: #a8a294;
+    --ink-50:   #6b675f;
+    --ink-100:  #3a3833;
+    --ink-200:  #1d1c19;
+    --ink-900:  #0d0c0b;
+    --white:    #ffffff;
+    --red-50:   #f1dcd9;
+    --red-500:  #7e201a;
+    --red-600:  #5f1612;
+    --red-700:  #420e0b;
+    --olive-50:  #eef0e6;
+    --olive-500: #5e6b3b;
+    --olive-700: #424b28;
+
+    --surface-page:    var(--bone-50);
+    --surface-raised:  var(--white);
+    --surface-inverse: var(--ink-200);
+    --fg-primary:      var(--ink-200);
+    --fg-secondary:    var(--ink-50);
+    --fg-muted:        var(--bone-400);
+    --fg-accent:       var(--red-500);
+
+    --r-1:   2px;
+    --r-pill: 999px;
+
+    --s-1: 4px;  --s-2: 8px;  --s-3: 12px; --s-4: 16px;
+    --s-5: 24px; --s-6: 32px; --s-7: 48px; --s-8: 64px; --s-9: 96px;
+
+    --b-med:  1.5px solid var(--ink-200);
+    --b-thick: 2px solid var(--ink-200);
+
+    --font-display: 'Space Grotesk', 'Helvetica Neue', system-ui, sans-serif;
+    --font-body:    'Inter', system-ui, -apple-system, sans-serif;
+    --font-mono:    'JetBrains Mono', ui-monospace, 'SF Mono', Consolas, monospace;
+
+    --t-xs:   11px;
+    --t-sm:   13px;
+    --t-base: 15px;
+    --t-md:   17px;
+    --t-xl:   28px;
+    --t-2xl:  40px;
+
+    --ease:     cubic-bezier(0.2, 0.0, 0.2, 1);
+    --dur-fast: 120ms;
+    --dur:      180ms;
   }
+
+  /* ── BASE ── */
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
+  html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
   body {
-    font-family: 'Sora', system-ui, sans-serif;
-    background: var(--paper);
-    color: var(--ink);
-    line-height: 1.6;
-    font-size: 14px;
+    font-family: var(--font-body);
+    font-size: var(--t-base);
+    line-height: 1.55;
+    color: var(--fg-primary);
+    background: var(--surface-page);
     -webkit-font-smoothing: antialiased;
     min-height: 100vh;
     display: grid;
-    grid-template-rows: 60px 1fr;
+    grid-template-rows: auto 1fr;
   }
-  ::selection { background: var(--accent-bg); }
+  ::selection { background: var(--ink-200); color: var(--bone-50); }
   a { color: inherit; text-decoration: none; }
   button { font-family: inherit; cursor: pointer; }
-  .serif { font-family: 'DM Serif Display', Georgia, serif; font-weight: 400; letter-spacing: -0.02em; }
   @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ── TYPE ── */
+  h1 {
+    font-family: var(--font-display); font-weight: 600;
+    font-size: clamp(28px, 4vw, var(--t-2xl));
+    line-height: 1.05; letter-spacing: -0.02em; margin: 0;
+  }
+  .t-eyebrow {
+    font-family: var(--font-mono); font-size: var(--t-xs); font-weight: 500;
+    letter-spacing: 0.18em; text-transform: uppercase; color: var(--fg-secondary);
+  }
+  .t-label {
+    font-family: var(--font-body); font-size: var(--t-xs); font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-secondary);
+    display: block; margin-bottom: 6px;
+  }
+
+  /* ── PRIMITIVES ── */
+  .btn {
+    font-family: var(--font-body); font-size: var(--t-sm); font-weight: 600;
+    letter-spacing: 0.02em; padding: 12px 22px;
+    border: var(--b-med); border-radius: var(--r-1);
+    background: var(--ink-200); color: var(--bone-50);
+    cursor: pointer; display: inline-flex; align-items: center; gap: 10px;
+    text-decoration: none; width: 100%; justify-content: center;
+    transition: background var(--dur-fast) var(--ease);
+  }
+  .btn:hover { background: var(--ink-900); }
+  .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+  .btn--accent { background: var(--red-500); border-color: var(--red-500); color: var(--white); }
+  .btn--accent:hover:not(:disabled) { background: var(--red-600); border-color: var(--red-600); }
+  .btn--ghost { background: transparent; color: var(--ink-200); }
+  .btn--ghost:hover { background: var(--ink-200); color: var(--bone-50); }
+  .btn--sm { padding: 8px 16px; font-size: var(--t-xs); letter-spacing: 0.06em; text-transform: uppercase; width: auto; }
+
+  .input {
+    font-family: var(--font-body); font-size: var(--t-base);
+    padding: 11px 14px; background: var(--white);
+    border: 1.5px solid var(--ink-200); border-radius: var(--r-1);
+    color: var(--fg-primary); width: 100%; outline: none; appearance: none;
+    transition: border-color var(--dur-fast) var(--ease);
+  }
+  .input:focus { border-color: var(--red-500); box-shadow: 0 0 0 2px rgba(126,32,26,.12); }
+  .input.error { border-color: var(--red-500); }
+  .input::placeholder { color: var(--fg-muted); }
 
   /* ── NAV ── */
   #auth-nav {
-    height: 60px; padding: 0 28px;
     display: flex; align-items: center; justify-content: space-between;
-    border-bottom: 1px solid var(--border);
-    background: var(--paper);
+    padding: 14px 32px;
+    background: var(--bone-50);
+    border-bottom: 2px solid var(--ink-200);
   }
-  .nav-brand {
-    font-family: 'DM Serif Display', Georgia, serif;
-    font-size: 22px; letter-spacing: -0.03em; color: var(--ink);
+  .sp-brand {
+    font-family: var(--font-display); font-weight: 700; font-size: 22px;
+    letter-spacing: -0.04em; color: var(--ink-200); text-decoration: none;
+    display: inline-flex; align-items: baseline;
   }
-  .nav-brand em { color: var(--accent); font-style: italic; }
-  .nav-back { font-size: 13px; color: var(--ink3); font-weight: 500; }
+  .sp-brand-mark { position: relative; }
+  .sp-brand-mark::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: -3px;
+    height: 3px; background: var(--red-500);
+  }
+  .nav-back {
+    font-family: var(--font-mono); font-size: var(--t-xs); letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--ink-100);
+    padding: 4px 0; border-bottom: 1.5px solid transparent;
+    transition: border-color var(--dur) var(--ease), color var(--dur) var(--ease);
+  }
+  .nav-back:hover { color: var(--ink-200); border-bottom-color: var(--ink-200); }
+
+  @media (max-width: 480px) { #auth-nav { padding: 12px 20px; } }
 
   /* ── LAYOUT ── */
   #auth-body {
     display: grid;
     grid-template-columns: 1fr 1fr;
   }
-  @media (max-width: 760px) {
+  @media (max-width: 900px) {
     #auth-body { grid-template-columns: 1fr; }
     #trust-col { display: none; }
   }
+
+  /* ── FORM COLUMN ── */
   #form-col {
-    padding: 60px 28px 60px 8vw;
+    padding: 80px 8vw;
     display: flex; flex-direction: column; justify-content: center;
+    background: var(--bone-50);
+    border-right: 2px solid var(--ink-200);
   }
-  #trust-col {
-    background: var(--white);
-    padding: 60px 8vw 60px 28px;
-    display: flex; flex-direction: column; justify-content: center;
-    border-left: 1px solid var(--border);
-  }
+  .auth-form-wrap { max-width: 440px; width: 100%; }
+  .auth-eyebrow { margin-bottom: 14px; }
+  #auth-heading { margin-bottom: 12px; }
+  #auth-subhead { margin-bottom: 36px; color: var(--ink-50); font-size: var(--t-base); }
 
-  /* ── TABS ── */
-  .mode-tabs {
-    display: flex; gap: 6px; margin-bottom: 36px;
-    background: var(--paper2); padding: 4px; border-radius: 10px;
-  }
+  /* Tabs */
+  .mode-tabs { display: flex; gap: 0; margin-bottom: 28px; border: 1.5px solid var(--ink-200); }
   .mode-tab {
-    flex: 1; padding: 10px 0; border-radius: 8px; border: none;
-    background: transparent; color: var(--ink);
-    font-size: 13px; font-weight: 600; transition: all .15s;
+    flex: 1; padding: 12px 0; background: transparent; border: 0;
+    border-right: 1.5px solid var(--ink-200); cursor: pointer;
+    font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--ink-100);
+    transition: background var(--dur) var(--ease), color var(--dur) var(--ease);
   }
-  .mode-tab.active { background: var(--white); box-shadow: var(--shadow-sm); }
+  .mode-tab:last-child { border-right: 0; }
+  .mode-tab.active { background: var(--ink-200); color: var(--bone-50); }
 
-  /* ── FORM ── */
+  /* Form */
   #auth-form { display: flex; flex-direction: column; gap: 16px; }
-  .field-group { display: flex; flex-direction: column; gap: 6px; }
-  .field-label {
-    font-size: 11px; font-weight: 700; letter-spacing: .06em;
-    text-transform: uppercase; color: var(--ink3);
-  }
-  .field-input {
-    width: 100%; padding: 10px 13px;
-    border: 1.5px solid var(--border2); border-radius: 10px;
-    font-size: 14px; background: #fff; color: var(--ink);
-    font-family: inherit; outline: none; transition: border-color .15s;
-    appearance: none;
-  }
-  .field-input:focus { border-color: var(--accent); }
-  .field-input.error { border-color: var(--error); }
-  .field-err { font-size: 11px; color: var(--error); }
+  .field-group { display: flex; flex-direction: column; }
+  .field-err { font-size: var(--t-xs); color: var(--red-500); margin-top: 4px; }
   .field-hidden { display: none; }
 
-  /* ── FEEDBACK BANNERS ── */
-  .banner {
-    padding: 10px 13px; border-radius: 10px;
-    font-size: 13px; font-weight: 500; display: none;
-  }
-  .banner.error { background: rgba(192,57,43,.08); border: 1px solid var(--error); color: var(--error); }
-  .banner.success { background: rgba(26,122,110,.08); border: 1px solid var(--success); color: var(--success); }
-  .banner.visible { display: block; }
+  /* Banners */
+  .banner { padding: 10px 14px; font-size: var(--t-sm); display: none; align-items: center; gap: 8px; }
+  .banner.error { display: flex; background: var(--red-50); border: 1.5px solid var(--red-500); color: var(--red-700); }
+  .banner.success { display: flex; background: var(--olive-50); border: 1.5px solid var(--olive-500); color: var(--olive-700); }
+  .banner.visible { display: flex; }
 
-  /* ── SUBMIT BUTTON ── */
-  #submit-btn {
-    padding: 12px 22px; border-radius: 10px; border: none;
-    font-size: 13px; font-weight: 600; transition: all .15s;
-    display: flex; align-items: center; justify-content: center; gap: 8px;
-    min-height: 44px; font-family: inherit;
-  }
-  #submit-btn:not(:disabled) { background: var(--accent); color: #fff; cursor: pointer; }
-  #submit-btn:not(:disabled):hover { background: var(--accent-h); }
-  #submit-btn:disabled { background: var(--paper3); color: var(--ink4); cursor: not-allowed; }
+  /* Auth message */
+  #auth-message { font-size: var(--t-xs); color: var(--red-500); min-height: 18px; padding-top: 4px; font-family: var(--font-mono); letter-spacing: 0.04em; }
+
+  /* Submit button state */
+  #submit-btn { margin-top: 8px; }
+  #submit-btn.loading { opacity: 0.7; cursor: progress; }
   .spinner {
     width: 14px; height: 14px; border-radius: 50%;
     border: 2px solid rgba(255,255,255,.3); border-top-color: #fff;
-    animation: spin .8s linear infinite; display: none;
+    animation: spin .8s linear infinite; display: none; flex-shrink: 0;
   }
-  #submit-btn.loading .spinner { display: inline-block; }
+  #submit-btn.loading .spinner { display: block; }
+  #submit-btn.loading .btn-arrow { display: none; }
 
-  /* ── SESSION BAR (logged-in state) ── */
-  #session-bar {
-    display: flex; align-items: center; justify-content: space-between; gap: 16px;
-    padding: 12px 0; margin-bottom: 20px;
-  }
+  /* Legal */
+  .auth-legal { font-size: var(--t-xs); color: var(--fg-muted); margin-top: 20px; text-align: center; font-family: var(--font-mono); letter-spacing: 0.04em; }
+  .auth-legal a { color: var(--red-500); }
+
+  /* Session bar */
+  #session-bar { margin-bottom: 24px; }
   #session-bar[hidden] { display: none; }
   #auth-forms[hidden] { display: none; }
-  #current-user { font-weight: 600; overflow-wrap: anywhere; }
-  #logout-button {
-    background: var(--accent); color: white; border: none;
-    padding: 10px 18px; border-radius: var(--r);
-    font-family: inherit; font-size: 13px; font-weight: 600;
-    cursor: pointer; transition: background .15s; white-space: nowrap;
+  .auth-session {
+    border: 1.5px solid var(--ink-200); padding: 18px 20px;
+    background: var(--white); display: flex; align-items: center; gap: 14px;
   }
-  #logout-button:hover { background: var(--accent-h); }
+  .auth-session-av {
+    width: 40px; height: 40px; background: var(--ink-200); color: var(--bone-50);
+    display: inline-flex; align-items: center; justify-content: center;
+    font-family: var(--font-display); font-weight: 700; font-size: 14px;
+    flex-shrink: 0;
+  }
+  #current-user { font-size: var(--t-sm); color: var(--ink-50); overflow-wrap: anywhere; flex: 1; }
 
-  /* ── RESUME PANEL (app-shell) ── */
+  /* Resume panel */
   #app-shell[hidden] { display: none; }
   #app-shell { padding: 0 0 40px; }
   #resume-panel { max-width: 680px; margin: 40px auto 60px; }
 
-  /* ── TRUST SIGNALS ── */
-  .trust-wrap { display: flex; flex-direction: column; gap: 32px; }
-  .trust-h {
-    font-family: 'DM Serif Display', Georgia, serif; font-size: 32px;
-    color: var(--ink); line-height: 1.2; margin-bottom: 8px; font-weight: 400;
-  }
-  .trust-h em { color: var(--accent); font-style: italic; }
-  .trust-p { font-size: 15px; color: var(--ink2); line-height: 1.7; }
-  .trust-stats {
-    display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px;
-  }
-  .trust-stat {
-    padding: 18px; background: #fff; border: 1px solid var(--border); border-radius: 14px;
-  }
-  .trust-stat-n {
-    font-family: 'DM Serif Display', Georgia, serif; font-size: 26px;
-    color: var(--accent); line-height: 1;
-  }
-  .trust-stat-l { font-size: 12px; color: var(--ink3); margin-top: 6px; line-height: 1.4; }
-  .trust-review {
-    padding: 20px; background: var(--accent-bg);
-    border: 1px solid rgba(146,43,33,.12); border-radius: 14px;
-  }
-  .trust-stars { font-size: 20px; margin-bottom: 10px; letter-spacing: 2px; }
-  .trust-review p { font-size: 13px; color: var(--ink2); line-height: 1.6; }
-  .trust-review cite { font-size: 12px; color: var(--ink3); margin-top: 8px; display: block; font-style: normal; font-weight: 500; }
-  .trust-security {
-    display: flex; align-items: center; gap: 8px;
-    padding: 12px 14px; background: #fff; border: 1px solid var(--border);
-    border-radius: 10px; font-size: 12px; color: var(--ink3);
-  }
-
-  /* ── RESUME CARDS (reusing style.css patterns inline for isolation) ── */
+  /* Resume cards */
   .rp-toolbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
-  .rp-count { font-size: 13px; color: var(--ink3); }
+  .rp-count { font-family: var(--font-mono); font-size: var(--t-xs); color: var(--ink-50); letter-spacing: 0.08em; text-transform: uppercase; }
   .btn-builder-cta {
-    display: inline-block; background: var(--accent); color: white;
-    padding: 10px 22px; border-radius: var(--r); font-size: 13px; font-weight: 600; transition: background .15s;
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--red-500); color: var(--white);
+    padding: 10px 18px; border-radius: var(--r-1); border: 1.5px solid var(--red-500);
+    font-family: var(--font-body); font-size: var(--t-sm); font-weight: 600;
+    transition: background var(--dur-fast) var(--ease);
   }
-  .btn-builder-cta:hover { background: var(--accent-h); }
-  .rp-card { background: #fff; border-radius: var(--r-lg); border: 1.5px solid var(--border); box-shadow: 0 8px 32px rgba(26,24,20,.12); overflow: hidden; margin-bottom: 24px; }
-  .rp-header { background: var(--ink); color: white; padding: 32px; display: flex; align-items: center; gap: 24px; }
+  .btn-builder-cta:hover { background: var(--red-600); border-color: var(--red-600); }
+  .rp-card { background: var(--white); border: 2px solid var(--ink-200); border-radius: var(--r-1); overflow: hidden; margin-bottom: 24px; }
+  .rp-header { background: var(--ink-200); color: var(--bone-50); padding: 28px 28px; display: flex; align-items: center; gap: 20px; }
   .rp-avatar {
-    width: 60px; height: 60px; border-radius: 50%;
-    background: linear-gradient(135deg, var(--accent-bg), #f0a090);
-    color: var(--accent); font-family: 'DM Serif Display', serif; font-size: 20px;
-    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    width: 52px; height: 52px; flex-shrink: 0;
+    background: var(--bone-200); color: var(--ink-200);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-display); font-weight: 700; font-size: 18px;
+    letter-spacing: -0.03em;
   }
-  .rp-name { font-family: 'DM Serif Display', serif; font-size: 24px; font-weight: 400; letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 6px; }
-  .rp-job-title { font-size: 14px; opacity: .7; }
-  .rp-body { padding: 28px 32px 24px; }
-  .rp-meta { display: grid; grid-template-columns: auto 1fr; gap: 10px 20px; }
-  .rp-meta dt { font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: .06em; color: var(--ink4); padding-top: 2px; }
-  .rp-meta dd { margin: 0; color: var(--ink); font-size: 13px; line-height: 1.5; }
-  .rp-updated { font-size: 12px; color: var(--ink4); margin: 20px 0 0; }
-  .rp-actions { border-top: 1px solid var(--border); padding: 20px 32px; display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
-  .btn-rp-primary { background: var(--accent); color: white; border: none; padding: 9px 20px; border-radius: var(--r); font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer; text-decoration: none; display: inline-block; transition: background .15s; }
-  .btn-rp-primary:hover { background: var(--accent-h); }
-  .btn-rp { background: transparent; color: var(--ink2); border: 1.5px solid var(--border2); padding: 9px 18px; border-radius: var(--r); font-family: inherit; font-size: 13px; cursor: pointer; transition: border-color .15s, color .15s; }
-  .btn-rp:hover { border-color: var(--ink3); color: var(--ink); }
-  .btn-rp-danger { margin-left: auto; background: transparent; color: var(--error); border: 1.5px solid var(--error); padding: 9px 18px; border-radius: var(--r); font-family: inherit; font-size: 13px; cursor: pointer; transition: background .15s, color .15s; }
-  .btn-rp-danger:hover { background: var(--error); color: white; }
+  .rp-name { font-family: var(--font-display); font-size: 22px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 4px; color: var(--bone-50); }
+  .rp-job-title { font-size: var(--t-sm); color: var(--bone-400); font-family: var(--font-mono); letter-spacing: 0.04em; }
+  .rp-body { padding: 24px 28px 20px; }
+  .rp-meta { display: grid; grid-template-columns: auto 1fr; gap: 8px 20px; }
+  .rp-meta dt { font-family: var(--font-mono); font-weight: 700; font-size: var(--t-xs); text-transform: uppercase; letter-spacing: 0.08em; color: var(--bone-400); padding-top: 2px; }
+  .rp-meta dd { margin: 0; color: var(--ink-100); font-size: var(--t-sm); line-height: 1.5; }
+  .rp-updated { font-family: var(--font-mono); font-size: var(--t-xs); color: var(--fg-muted); margin: 16px 0 0; letter-spacing: 0.04em; }
+  .rp-actions { border-top: 1.5px solid var(--ink-200); padding: 16px 28px; display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  .btn-rp-primary {
+    background: var(--ink-200); color: var(--bone-50); border: 1.5px solid var(--ink-200);
+    padding: 8px 18px; border-radius: var(--r-1); font-family: var(--font-body);
+    font-size: var(--t-sm); font-weight: 600; cursor: pointer; text-decoration: none;
+    display: inline-block; transition: background var(--dur-fast) var(--ease);
+  }
+  .btn-rp-primary:hover { background: var(--ink-900); border-color: var(--ink-900); }
+  .btn-rp {
+    background: transparent; color: var(--ink-100); border: 1.5px solid var(--bone-300);
+    padding: 8px 16px; border-radius: var(--r-1); font-family: var(--font-body);
+    font-size: var(--t-sm); cursor: pointer;
+    transition: border-color var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);
+  }
+  .btn-rp:hover { border-color: var(--ink-200); color: var(--ink-200); }
+  .btn-rp-danger {
+    margin-left: auto; background: transparent; color: var(--red-500);
+    border: 1.5px solid var(--red-500); padding: 8px 16px; border-radius: var(--r-1);
+    font-family: var(--font-body); font-size: var(--t-sm); cursor: pointer;
+    transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);
+  }
+  .btn-rp-danger:hover { background: var(--red-500); color: var(--white); }
   .rp-empty { text-align: center; padding: 60px 20px; }
-  .rp-empty p { color: var(--ink3); font-size: 15px; margin-bottom: 20px; }
+  .rp-empty p { color: var(--ink-50); font-size: var(--t-base); margin-bottom: 20px; }
 
-  /* auth message */
-  #auth-message { font-size: 13px; color: var(--error); min-height: 20px; padding: 6px 0 0; }
+  /* ── TRUST COLUMN ── */
+  #trust-col {
+    padding: 80px 8vw;
+    background: var(--ink-200); color: var(--bone-50);
+    display: flex; flex-direction: column; gap: 40px; justify-content: center;
+  }
+  .auth-trust-eyebrow { color: var(--bone-400); margin-bottom: 4px; }
+  .auth-trust-h { color: var(--bone-50); margin-bottom: 16px; font-family: var(--font-display); font-weight: 600; font-size: clamp(24px, 3vw, var(--t-xl)); line-height: 1.1; letter-spacing: -0.02em; }
+  .auth-trust-p { color: var(--bone-300); max-width: 400px; font-size: var(--t-base); }
 
-  /* heading / subhead */
-  #auth-heading { font-size: 40px; line-height: 1.15; margin-bottom: 8px; color: var(--ink); }
-  #auth-subhead { font-size: 14px; color: var(--ink2); line-height: 1.6; margin-bottom: 36px; }
+  .auth-trust-stats {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+    border: 1.5px solid var(--bone-400);
+  }
+  .auth-trust-stat {
+    padding: 22px 24px;
+    border-right: 1.5px solid var(--bone-400);
+    border-bottom: 1.5px solid var(--bone-400);
+  }
+  .auth-trust-stat:nth-child(2n) { border-right: 0; }
+  .auth-trust-stat:nth-last-child(-n+2) { border-bottom: 0; }
+  .auth-trust-stat-n {
+    font-family: var(--font-mono); font-weight: 700; font-size: 28px;
+    letter-spacing: -0.02em; color: var(--red-500); line-height: 1; margin-bottom: 8px;
+  }
+  .auth-trust-stat-l {
+    font-family: var(--font-mono); font-size: 10px;
+    letter-spacing: 0.14em; text-transform: uppercase; color: var(--bone-300);
+  }
 
-  /* trust col inline overrides */
-  .trust-col-lock { font-size: 16px; }
+  .auth-quote { margin: 0; padding-left: 20px; position: relative; max-width: 440px; }
+  .auth-quote-rule { position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--red-500); }
+  .auth-quote p { font-family: var(--font-display); font-weight: 500; font-size: 18px; color: var(--bone-50); line-height: 1.4; letter-spacing: -0.01em; }
+  .auth-quote cite { font-style: normal; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--bone-400); display: block; margin-top: 14px; }
 
-  /* footer legal line */
-  .auth-legal { font-size: 12px; color: var(--ink4); margin-top: 20px; text-align: center; }
-  .auth-legal a { color: var(--accent); font-weight: 600; }
+  .auth-security {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 14px; border: 1px solid var(--bone-400);
+    font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em;
+    color: var(--bone-300); align-self: flex-start;
+  }
 
   /* ── RESPONSIVE ── */
   @media (max-width: 480px) {
-    #auth-nav { padding: 0 16px; }
-    .nav-brand { font-size: 18px; }
-
-    #form-col { padding: 32px 16px 40px; }
-    #auth-heading { font-size: 28px; }
-    #auth-subhead { font-size: 13px; margin-bottom: 24px; }
-
-    /* resume cards */
+    #form-col { padding: 40px 20px; }
+    #auth-heading { font-size: 26px; }
+    #auth-subhead { margin-bottom: 24px; }
     .rp-header { padding: 18px 16px; gap: 12px; }
-    .rp-avatar { width: 44px; height: 44px; font-size: 15px; }
+    .rp-avatar { width: 40px; height: 40px; font-size: 14px; }
     .rp-name { font-size: 18px; }
     .rp-body { padding: 16px; }
-    .rp-meta { gap: 8px 12px; }
-    .rp-actions { padding: 14px 16px; gap: 8px; flex-wrap: wrap; }
-    .btn-rp-danger { margin-left: 0; width: 100%; }
-
+    .rp-actions { padding: 14px 16px; }
+    .btn-rp-danger { margin-left: 0; width: 100%; justify-content: center; text-align: center; }
     #resume-panel { margin: 16px auto 40px; }
-    #session-bar { flex-wrap: wrap; }
   }
   </style>
 </head>
@@ -266,8 +351,8 @@
 
 <!-- NAV -->
 <nav id="auth-nav">
-  <a href="/home.html" class="nav-brand" id="nav-brand">resume<em>craft</em></a>
-  <a href="/home.html" class="nav-back" id="nav-back">← Back</a>
+  <a href="/home.html" class="sp-brand" id="nav-brand"><span class="sp-brand-mark">Cv</span>Adda</a>
+  <a href="/home.html" class="nav-back" id="nav-back">← Home</a>
 </nav>
 
 <!-- AUTH BODY -->
@@ -275,96 +360,133 @@
 
   <!-- LEFT: form column -->
   <div id="form-col">
+    <div class="auth-form-wrap">
 
-    <!-- Logged-in session bar -->
-    <div id="session-bar" hidden>
-      <span id="current-user"></span>
-      <button id="logout-button" type="button">Logout</button>
-    </div>
-
-    <!-- Auth forms -->
-    <div id="auth-forms">
-      <h1 class="serif" id="auth-heading">Welcome back</h1>
-      <p id="auth-subhead">Sign in to your account and pick up where you left off.</p>
-
-      <!-- Tabs -->
-      <div class="mode-tabs" role="tablist">
-        <button type="button" class="mode-tab active" id="tab-signin" role="tab" aria-selected="true" aria-controls="auth-form">Sign in</button>
-        <button type="button" class="mode-tab" id="tab-register" role="tab" aria-selected="false" aria-controls="auth-form">Register</button>
+      <!-- Session bar (logged-in) -->
+      <div id="session-bar" hidden>
+        <div class="auth-session">
+          <div class="auth-session-av" id="session-av">?</div>
+          <span id="current-user"></span>
+          <button id="logout-button" type="button" class="btn btn--ghost btn--sm">Sign out</button>
+        </div>
       </div>
 
-      <!-- Single shared form -->
-      <form id="auth-form" novalidate>
-        <div class="field-group">
-          <label class="field-label" for="auth-email">Email address</label>
-          <input class="field-input" type="email" id="auth-email" placeholder="you@company.com" autocomplete="email">
-          <span class="field-err" id="email-err" hidden>Enter a valid email</span>
+      <!-- Auth forms -->
+      <div id="auth-forms">
+        <p class="t-eyebrow auth-eyebrow">CvAdda · Account</p>
+        <h1 id="auth-heading">Welcome back</h1>
+        <p id="auth-subhead">Sign in to your account and pick up where you left off.</p>
+
+        <div class="mode-tabs" role="tablist">
+          <button type="button" class="mode-tab active" id="tab-signin" role="tab" aria-selected="true" aria-controls="auth-form">Sign in</button>
+          <button type="button" class="mode-tab" id="tab-register" role="tab" aria-selected="false" aria-controls="auth-form">Register</button>
         </div>
 
-        <div class="field-group">
-          <label class="field-label" for="auth-password">Password</label>
-          <input class="field-input" type="password" id="auth-password" placeholder="••••••••" autocomplete="current-password">
-          <span class="field-err" id="pw-err" hidden>Password must be 8+ characters</span>
-        </div>
+        <form id="auth-form" novalidate>
+          <div class="field-group">
+            <label class="t-label" for="auth-email">Email address</label>
+            <input class="input" type="email" id="auth-email" placeholder="you@company.com" autocomplete="email">
+            <span class="field-err" id="email-err" hidden>Enter a valid email</span>
+          </div>
 
-        <div class="field-group field-hidden" id="confirm-group">
-          <label class="field-label" for="auth-confirm">Confirm password</label>
-          <input class="field-input" type="password" id="auth-confirm" placeholder="••••••••" autocomplete="new-password">
-          <span class="field-err" id="confirm-err" hidden>Passwords don't match</span>
-        </div>
+          <div class="field-group">
+            <label class="t-label" for="auth-password">Password</label>
+            <input class="input" type="password" id="auth-password" placeholder="••••••••" autocomplete="current-password">
+            <span class="field-err" id="pw-err" hidden>Password must be 8+ characters</span>
+          </div>
 
-        <div class="banner error" id="banner-error" role="alert"></div>
-        <div class="banner success" id="banner-success" role="status"></div>
+          <div class="field-group field-hidden" id="confirm-group">
+            <label class="t-label" for="auth-confirm">Confirm password</label>
+            <input class="input" type="password" id="auth-confirm" placeholder="••••••••" autocomplete="new-password">
+            <span class="field-err" id="confirm-err" hidden>Passwords don't match</span>
+          </div>
 
-        <p id="auth-message" role="status"></p>
+          <div class="banner error" id="banner-error" role="alert"></div>
+          <div class="banner success" id="banner-success" role="status"></div>
+          <p id="auth-message" role="status"></p>
 
-        <button type="submit" id="submit-btn" disabled>
-          <span class="spinner"></span>
-          <span id="btn-label">Sign in</span>
-        </button>
-      </form>
+          <button type="submit" id="submit-btn" class="btn btn--accent" disabled>
+            <span class="spinner"></span>
+            <span id="btn-label">Sign in</span>
+            <i data-lucide="arrow-right" class="btn-arrow"></i>
+          </button>
+        </form>
 
-      <p class="auth-legal">
-        By signing in, you agree to our
-        <a href="#">Terms</a> and <a href="#">Privacy</a>.
-      </p>
+        <p class="auth-legal">
+          By signing in you agree to our <a href="#">Terms</a> and <a href="#">Privacy</a>.
+        </p>
+      </div>
+
+      <!-- App shell (resume panel after login) -->
+      <div id="app-shell" hidden>
+        <section id="resume-panel"></section>
+      </div>
+
     </div>
-
-    <!-- App shell (resume panel after login) -->
-    <div id="app-shell" hidden>
-      <section id="resume-panel"></section>
-    </div>
-
   </div>
 
-  <!-- RIGHT: trust signals -->
+  <!-- RIGHT: trust column -->
   <div id="trust-col">
-    <div class="trust-wrap">
-      <div>
-        <div class="trust-h">Join <em>thousands</em> of professionals.</div>
-        <p class="trust-p">Build once, use everywhere. Your resume is cloud-saved and shareable in seconds.</p>
+    <p class="t-eyebrow auth-trust-eyebrow">Why · 01</p>
+    <div>
+      <div class="auth-trust-h">Your résumé, privately yours.</div>
+      <p class="auth-trust-p">Built once, yours forever. Cloud-saved, exportable any time, never sold, never shared.</p>
+    </div>
+
+    <div class="auth-trust-stats">
+      <div class="auth-trust-stat">
+        <div class="auth-trust-stat-n">124k</div>
+        <div class="auth-trust-stat-l">Resumes safely stored</div>
       </div>
-      <div class="trust-stats">
-        <div class="trust-stat"><div class="trust-stat-n">5K+</div><div class="trust-stat-l">Resumes built</div></div>
-        <div class="trust-stat"><div class="trust-stat-n">&lt;5 min</div><div class="trust-stat-l">Average time</div></div>
-        <div class="trust-stat"><div class="trust-stat-n">38</div><div class="trust-stat-l">Professions</div></div>
-        <div class="trust-stat"><div class="trust-stat-n">100%</div><div class="trust-stat-l">Data yours</div></div>
+      <div class="auth-trust-stat">
+        <div class="auth-trust-stat-n">0</div>
+        <div class="auth-trust-stat-l">Data sold or shared</div>
       </div>
-      <div class="trust-review">
-        <div class="trust-stars">★★★★★</div>
-        <p>"Built my entire resume in one sitting. The multiple entry modes saved me so much time."</p>
-        <cite>— Sarah L., Registered Nurse</cite>
+      <div class="auth-trust-stat">
+        <div class="auth-trust-stat-n">38</div>
+        <div class="auth-trust-stat-l">Professions covered</div>
       </div>
-      <div class="trust-security">
-        <span class="trust-col-lock">🔒</span>
-        Your data is encrypted and yours to export anytime.
+      <div class="auth-trust-stat">
+        <div class="auth-trust-stat-n">100%</div>
+        <div class="auth-trust-stat-l">Free, no card</div>
       </div>
+    </div>
+
+    <blockquote class="auth-quote">
+      <div class="auth-quote-rule"></div>
+      <p>"Plain, fast, no nonsense. Built my whole resume in one sitting and didn't think about it again."</p>
+      <cite>Sarah L., Registered Nurse · Chicago</cite>
+    </blockquote>
+
+    <div class="auth-security">
+      <i data-lucide="shield-check"></i>
+      End-to-end encrypted · SOC 2 · GDPR compliant
     </div>
   </div>
 
 </div>
 
 <script src="/auth.js"></script>
+<script>
+  window.addEventListener('load', () => { if (window.lucide) lucide.createIcons(); });
 
+  /* Update session avatar initials when user logs in */
+  const _origShowLoggedIn = window.showLoggedIn;
+  const sessionAv = document.getElementById('session-av');
+  const _origCurrentUser = document.getElementById('current-user');
+
+  const observer = new MutationObserver(() => {
+    const text = _origCurrentUser.textContent || '';
+    const email = text.replace('Signed in as ', '').trim();
+    if (email) {
+      const parts = email.split('@')[0].split(/[\s._-]+/);
+      const initials = parts.length >= 2
+        ? (parts[0][0] + parts[parts.length - 1][0]).toUpperCase()
+        : parts[0].slice(0, 2).toUpperCase();
+      sessionAv.textContent = initials;
+    }
+  });
+  observer.observe(_origCurrentUser, { childList: true, characterData: true, subtree: true });
+</script>
 </body>
 </html>

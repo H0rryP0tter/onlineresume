@@ -12,6 +12,7 @@ archiveStudyModules/
 Claude Design/
 mongodb-database-tools/
 mongodump-export/
+spartan/
 
 # Dev documentation & internal files
 jwt-flow.html
